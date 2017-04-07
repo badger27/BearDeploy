@@ -1,0 +1,181 @@
+<link href="http://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel="stylesheet">
+<div class="wrapper" ng-controller="homeCtrl">
+<div class="off-canvas-wrap" data-offcanvas>
+  <div class="inner-wrap">
+    <nav class="tab-bar">
+
+        <section class="left-small"  >
+           <a  class="left-off-canvas-toggle " id="startupButton" role="button" aria-label="Toggle Navigation">
+            <i  class="icon-hamburger" ng-class="{'icon-hamburger--close': showMenu}">
+              <span  class="icon-hamburger__bar  icon-hamburger__bar--first"></span>
+              <span ng-class="classBackground" class="icon-hamburger__bar"></span>
+              <span class="icon-hamburger__bar  icon-hamburger__bar--last"></span>
+            </i>
+           </a>
+        </section>
+
+
+        <section data-ng-show="$state.includes('app.player')" class="middle tab-bar-section">
+           <div class=" column">
+            <div class="search">
+<!--        <span><i class="fi-magnifying-glass"></i></span>-->
+            <input  ng-model="query" placeholder="Search for Players" >
+            </div>
+            </div>
+<!--            <h1 class="title">{{$state.current.data.title }}</h1>-->
+        </section>
+
+        <section class="right-small" data-ng-show="$state.includes('app.player')">
+          <a class="right-off-canvas-toggle fi-alert " ><sup>3</sup><span></span></a>
+        </section>
+    </nav>
+
+
+    <aside class="left-off-canvas-menu" >
+
+      <ul class="off-canvas-list">
+        <li>
+               <div class="row">
+                <div class="activaties">
+                     <a ui-sref="app.comingsoon" class="small-4 column"><img src=""></a>
+                     <a ui-sref="app.comingsoon" class="small-4 column"><img src=""></a>
+                     <a ui-sref="app.comingsoon" class="small-4 column"><img src=""></a>
+
+                </div>
+            </div>
+          </li>
+
+
+        <li>
+          <div class="row">
+            <a ui-sref="app.success"><div  class=" small-2 columns"><i class="fi-home"></i></div>
+                <div  class=" small-10 column"> Home</div>
+            </a>
+          </div>
+        </li>
+
+        <li>
+          <div class="row">
+            <a ui-sref="app.result"><div  class=" small-2 columns"><i class="fi-graph-bar"></i></div>
+                <div  class=" small-10 column"> Result</div>
+            </a>
+          </div>
+        </li>
+          <li>
+          <div class="row">
+            <a ui-sref="app.player"><div  class=" small-2 columns"><i class="fi-torso"></i></div>
+                <div  class=" small-10 column"> Players</div>
+            </a>
+          </div>
+        </li>
+
+         <li>
+          <div class="row">
+            <a ui-sref="app.group"><div  class=" small-2 columns"><i class="fi-torsos"></i></div>
+                <div  class=" small-10 column"> Group</div>
+            </a>
+          </div>
+        </li>
+
+          <li>
+          <div class="row">
+            <a ui-sref="app.settings"><div  class=" small-2 columns"><i class="fi-widget"></i></div>
+                <div  class=" small-10 column"> Setting</div>
+            </a>
+          </div>
+        </li>
+
+
+          <li>
+          <div class="row">
+            <a ui-sref="app.search"><div  class=" small-2 column"><i class="fi-widget"></i></div>
+                <div  class=" small-10 column"> Search</div>
+            </a>
+          </div>
+        </li>
+
+
+          <li>
+          <div class="row">
+            <a ui-sref="app.geo"><div  class=" small-2 column"><i class="fi-map"></i></div>
+                <div  class=" small-10 column"> Beargeo</div>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </aside>
+
+    <aside class="right-off-canvas-menu">
+      <ul class="off-canvas-list">
+        <li><label>Notifications</label></li>
+        <li><a href="#">Stephens result 5/7 </a></li>
+        <li><a href="#">Hari Seldon result 4/5</a></li>
+
+        <li class="has-submenu"><a href="#">R. Giskard Reventlov</a>
+            <ul class="right-submenu">
+                <li class="back"><a href="#">Back</a></li>
+                <li><label>Level 1</label></li>
+                <li><a href="#">Link 1</a></li>
+                <li class="has-submenu"><a href="#">Link 2 w/ submenu</a>
+                    <ul class="right-submenu">
+                        <li class="back"><a href="#">Back</a></li>
+                        <li><label>Level 2</label></li>
+                        <li><a href="#">...</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">...</a></li>
+            </ul>
+        </li>
+        <li><a href="#">...</a></li>
+      </ul>
+    </aside>
+
+    <section class="main-section">
+       <div class="full-height"  >
+        <div ui-view ="main"></div>
+       </div>
+    </section>
+
+  <a class="exit-off-canvas"></a>
+
+  </div>
+</div>
+
+</div>
+
+
+
+<script>
+
+//    $(document).foundation({
+//    offcanvas: {
+//        // Sets method in which offcanvas opens.
+//        // [ move | overlap_single | overlap ]
+//        open_method: 'move',
+//        // Should the menu close when a menu link is clicked?
+//        // [ true | false ]
+//        close_on_click: true
+//    }
+//});
+</script>
+
+
+<script>
+
+    $(".off-canvas-list .has-submenu a").click(function () {
+       $('.off-canvas-wrap').foundation('offcanvas', 'toggle', 'move-right');
+    });
+</script>
+
+<!--HAMBURGER TOGGLE SCRIPT-->
+<script>
+$(document).ready(function(){
+	$('#nav-icon1,#nav-icon2,#nav-icon3,#nav-icon4').click(function(){
+		$(this).toggleClass('open');
+	});
+});
+</script>
+
+<script>
+    $(document).foundation();
+</script>
