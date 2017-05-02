@@ -1,0 +1,80 @@
+
+<div class="container">
+   <div class="small-12 large-6 columns">
+<!--          <div  style="padding-top: 80px;" ui-sref="app.player">
+          <img src="http://gatherngo.tonicdigitalmedia.com/images/proto/setscore.png">
+          </div>-->
+               
+<!--          Form Start-->
+          <form class=""
+            name="myform"
+            ng-submit="addNotification()"
+            novalidate>
+           <label><h3 style="text-align: center">{{playerRecieveScore.firstname }} {{playerRecieveScore.lastname }} </h3></label>
+            <div class="inputwrapper">
+              <input type="number" name="notificationWins"
+              placeholder="0"
+              ng-model="notificationWinsPost" ng-required="true">
+            </div>
+
+              <label ><h3 style="text-align: center">{{currentUser.firstname }} {{currentUser.lastname }} </h3></label>
+              <div class="inputwrapper">
+              <input class="scoreInput" type="number" name="c"
+              placeholder="0"
+              ng-model="notificationWinsRecieve" ng-required="true">
+            </div>
+             
+              <div class="inputwrapper" ng-controller="ActionCtrl">
+
+            <button  style="text-align: center;" type="submit" class="expand"
+              ng-disabled="myform.$invalid" ng-click='toggleModal()' >Set Score
+
+            </button>
+                  <modal show='modalShown'>
+
+
+                      <div class="score-alert-box ">
+
+                      <h1>{{playerRecieveScore.firstname }} </h1>
+                      <p>has been sent a score request</p>
+                          <br>
+
+                          <button ui-sref="app.result" class="primary" ng-click='toggleModal()' >ok</button>
+
+                      </div>
+
+
+                  </modal>
+
+              </div>
+
+          </form>
+    
+            <div class="row">
+                <h3 style="text-align: center">{{playerRecieveScore.firstname }} {{playerRecieveScore.lastname }} </h3>
+               
+                <div class="statistic">
+                    
+                    <div class="small-2 column">wins</div>
+                    <div class="small-2 column">lost</div>
+                    <div class="small-3 column">played</div>
+                    <div class="small-3 column">points</div>
+                    <div class="small-2 column">cheats</div>
+                
+                </div>
+
+            </div>
+
+
+         
+</div>
+
+
+
+
+
+</div>
+    
+
+
+    
