@@ -1,0 +1,78 @@
+<div class=" small-12 medium-6 large-6 small-centered  columns "> 
+  
+    <section class="card register">
+      <form name="myform"
+        ng-submit="register()"
+        novalidate>
+          <div class="profile-card">
+           <div class="title">
+             <h1>Register</h1> 
+              <p class="message" ng-show="message">{{ message }}</p>
+           </div>
+         </div> 
+          
+       
+
+        <fieldset>
+          <input type="text" name="firstname" placeholder="First Name"
+          ng-model="user.firstname" ng-required="true">
+          <p class="error validationerror"
+          ng-show="myform.firstname.$invalid && myform.firstname.$touched">
+          First name required</p>
+
+          <input type="text" name="lastname" placeholder="Last Name"
+          ng-model="user.lastname" ng-required="true">
+          <p class="error validationerror"
+          ng-show="myform.lastname.$invalid && myform.lastname.$touched">
+          Last name required</p>
+
+          <input type="email" name="email" placeholder="Email"
+          ng-model="user.email" ng-required="true">
+          <p class="error validationerror"
+          ng-show="myform.email.$invalid && myform.email.$touched">
+          Must be a valid email</p>
+
+          <input type="password" name="password" placeholder="Password"
+          ng-model="user.password" ng-required="true">
+          <p class="error validationerror"
+          ng-show="myform.password.$invalid && myform.email.$touched">
+          Password is required</p>
+          
+          <div class="profile-card">
+            <div class="title">
+            <h1>Select Your Bear</h1>
+           </div>
+          </div>
+
+          
+          
+          <div  ng-controller="BearCtrl">
+           <div class="row ">         
+            <div class="form-group ">
+              <div class="small-4 column" ng-repeat="bearObject in bears  " class="checkbox-inline">
+              <input
+              type="checkbox"
+              name="bear" 
+              value="{{bearObject.name }}" 
+              ng-checked="selection.indexOf(bearObject) > -1"
+              ng-click="toggleSelection(bearObject)"
+              ng-model="selection">
+              
+              {{bearObject.name}}
+              </div>
+             </div>
+            </div>
+          </div>
+          <div class="row">
+           <button type="submit" class="btn expand"
+        ng-disabled="myform.$invalid">Register</button>
+        <p>or <a ng-href="#/login">login</a></p>
+          </div>
+          
+        </fieldset>
+
+       
+      </form>
+    </section>
+      
+    </div>

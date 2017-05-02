@@ -1,0 +1,77 @@
+<link href="http://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel="stylesheet">
+
+<div class="small-10 small-centered   columns" ng-controller="SetScoreController">
+   
+    <div class="wrapper">
+<!--     notification sent-->
+        <div class=" row" ng-repeat="(key, note) in notifications" >
+            <div  style = "background :#fda3a5;"  ng-if=" note.sender === true " data-alert class="alert-box success">
+                 <div class="row">
+                     <div class=" small-3 columns" >
+                         <h4 class="right">{{note.playerPostFirstName}} </h4>
+                     </div>
+                     <div class=" small-3  columns ">
+                         <div class="alert-circle-left blue left"> {{note.notificationWinsRecieve}}</div>
+                     </div>
+                     <div class=" small-3 columns " >
+                         <div class="alert-circle-right blue right "> {{note.notificationWinsPost}} </div>
+                     </div>
+                     <div class=" small-3  columns ">
+                         <h4 class="left">{{note.playerRecieveFirstName}} </h4>
+                     </div>
+                 </div>
+
+
+                <div class="row">
+                <div class=" small-6  columns ">
+                    <i class="fi-x " ng-click="deleteMeeting(key)"></i>
+                    <i class="fi-eye  " ></i>
+                </div>
+                    <div class=" small-6  columns ">
+                    <p ng-show="note.confirmShow">confirmed</p>
+                    </div>
+                </div>
+             </div>
+        </div>
+        
+<!--        Notifcation Recieved-->
+            <div  ng-if=" note.sender === false  " data-alert class="alert-box success">
+                <div class="row">
+                    <div class=" small-3 columns" >
+                        <h4 class="right">{{note.playerRecieveFirstName}}</h4>
+                    </div>
+                    <div class=" small-3  columns ">
+                        <div class="alert-circle-left blue left"> {{note.notificationWinsPost}}</div>
+                    </div>
+                    <div class=" small-3 columns " >
+                        <div class="alert-circle-right blue right "> {{note.notificationWinsRecieve}} </div>
+                    </div>
+                    <div class=" small-3  columns ">
+                        <h4 class="left">{{note.playerPostFirstName}}</h4>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                <div class=" small-6  columns ">
+                    <i class="fi-check  " ng-click="confirmScore(key)"></i>
+                    <i class="fi-x " ng-click="deleteMeeting(key)"></i>
+                    <i class="fi-eye" ></i>
+                </div>
+                    <div class=" small-6  columns ">
+                        <p ng-show="note.confirmShow">confirmed</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+      
+ 
+
+  <!--<alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>-->
+
+
