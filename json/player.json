@@ -1,0 +1,93 @@
+[
+  {
+    "id": 1,
+    "name": "Rob Brennan",
+    "rank": 200,
+    "rated": 12,
+    "wins": 129,
+    "lost": 418,
+    "points":100,
+    "profile_image": "http://gatherngo.tonicdigitalmedia.com/images/user/RobBrennan.png",
+   
+    "played": [
+                {"id": 2,
+                 "name": "dave",
+                 "scorewin": 12,
+                 "scoreloss": 6,
+                 "result": true
+                 }
+        ],
+        
+   "results": [
+                {"resid": 1,
+                 "name": "dave",
+                 "wins": 2,
+                 "lost": 2,
+                 "confirm": false
+                 },
+                   {"resid": 2,
+                 "name": "stephen",
+                 "wins": 1,
+                 "lost": 2,
+                 "confirm": false
+                 }
+        ]
+        
+  },
+  {
+    "id": 2,
+    "name": "Stephen Freir",
+    "rank": 200,
+    "rated": 12,
+    "wins": 100,
+    "lost": 233,
+    "points":100,
+     "profile_image": "http://gatherngo.tonicdigitalmedia.com/images/user/BlackDave.png",
+   
+    "played": [
+                {"id": 2,
+                 "name": "dave",
+                 "scorewin": 12,
+                 "scoreloss": 6,
+                 "result": true
+                 }
+        ]
+  }, {
+    "id": 3,
+    "name": "Daragh Fitzgerald",
+    "rank": 200,
+    "rated": 12,
+    "wins": 20,
+    "lost": 20,
+	"points":100,
+     "profile_image": "http://gatherngo.tonicdigitalmedia.com/images/user/BlackDave.png",
+   
+    "played": [
+                {"id": 2,
+                 "name": "dave",
+                 "scorewin": 12,
+                 "scoreloss": 6,
+                 "result": true
+                 }
+        ]
+  }, {
+    "id": 4,
+    "name": "default player",
+    "rank": 200,
+    "rated": 12,
+    "wins": 20,
+    "lost": 20,
+	"points":100,
+     "profile_image": "http://gatherngo.tonicdigitalmedia.com/images/user/default.png",
+   
+    "played": [
+                {"id": 2,
+                 "name": "dave",
+                 "scorewin": 12,
+                 "scoreloss": 6,
+                 "result": true
+                 }
+        ]
+  }
+]
+
