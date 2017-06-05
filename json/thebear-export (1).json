@@ -1,0 +1,173 @@
+{
+  "users" : {
+    "350b61d4-6498-4261-96c7-19773c788e2a" : {
+      "bears" : {
+        "golfbear" : {
+          "golflbearicon" : "http://gatherngo.tonicdigitalmedia.com/images/svg/golfbear.png"
+        },
+        "poolbear" : {
+          "poolbearicon" : "http://gatherngo.tonicdigitalmedia.com/images/svg/poolbear.png"
+        },
+        "squshbear" : {
+          "squashbearicon" : "http://gatherngo.tonicdigitalmedia.com/images/svg/squashbear.png"
+        }
+      },
+      "date" : 1453254888821,
+      "email" : "robbrennan@gmail.com",
+      "firstname" : "Rob",
+      "lastname" : "Brennan",
+      "lost" : 52,
+      "losttotals" : 44,
+      "played" : "",
+      "points" : 100,
+      "profile_image" : "http://gatherngo.tonicdigitalmedia.com/images/user/RobBrennan.png",
+      "rank" : 4,
+      "rated" : 12,
+      "regUser" : "350b61d4-6498-4261-96c7-19773c788e2a",
+      "results" : "",
+      "tag" : "Rake Em Bitch",
+      "wins" : 48,
+      "winstotal" : 44
+    },
+    "8fa060dd-cdc2-4786-a790-d03162b24eb5" : {
+      "golfbear" : {
+        "golflbearicon" : "http://gatherngo.tonicdigitalmedia.com/images/svg/golfbear.png"
+      },
+      "poolbear" : {
+        "date" : 1452201903070,
+        "email" : "sf@gmail.com",
+        "firstname" : "stephen",
+        "lastname" : "Freir",
+        "lost" : 52,
+        "losttotal" : 40,
+        "meetings" : {
+          "-K7TWhcU7_p99Bm4FYET" : {
+            "date" : 1452211103012,
+            "name" : "sdf",
+            "player1" : "playerID_01",
+            "score" : 1
+          },
+          "-K7T_AKbAbT5yFa4bKJH" : {
+            "date" : 1452212008518,
+            "name" : "ddd",
+            "player1" : "playerID_01",
+            "score" : 1
+          },
+          "-K8VXrLdoSc1zNt0-uIv" : {
+            "date" : 1453318698564,
+            "name" : "test",
+            "player1" : "playerID_01",
+            "score" : 2
+          },
+          "-K8WbvOS6xq5SR-Jg1ge" : {
+            "date" : 1453336803076,
+            "name" : "ss",
+            "player1" : "playerID_01",
+            "score" : 1
+          },
+          "-K8ar_Tw18-Gth6fAxTA" : {
+            "date" : 1453424793694,
+            "name" : "asd",
+            "player1" : "playerID_01",
+            "score" : 1
+          }
+        },
+        "played" : "",
+        "points" : 100,
+        "profile_image" : "http://gatherngo.tonicdigitalmedia.com/images/user/RobBrennan.png",
+        "rank" : 1,
+        "rated" : 12,
+        "regUser" : "8fa060dd-cdc2-4786-a790-d03162b24eb5",
+        "results" : "",
+        "tag" : "Its like a nightmare ",
+        "wins" : 48,
+        "winstotal" : 23
+      },
+      "squshbear" : {
+        "squashbearicon" : "http://gatherngo.tonicdigitalmedia.com/images/svg/squashbear.png"
+      }
+    },
+    "ad3b2a78-7831-4537-a2eb-365c99fb07fa" : {
+      "date" : 1452201903070,
+      "email" : "sf@gmail.com",
+      "firstname" : "stephen",
+      "lastname" : "Freir",
+      "lost" : 52,
+      "losttotal" : 40,
+      "meetings" : {
+        "-K7TWhcU7_p99Bm4FYET" : {
+          "date" : 1452211103012,
+          "name" : "sdf",
+          "player1" : "playerID_01",
+          "score" : 1
+        },
+        "-K7T_AKbAbT5yFa4bKJH" : {
+          "date" : 1452212008518,
+          "name" : "ddd",
+          "player1" : "playerID_01",
+          "score" : 1
+        },
+        "-K8VXrLdoSc1zNt0-uIv" : {
+          "date" : 1453318698564,
+          "name" : "test",
+          "player1" : "playerID_01",
+          "score" : 2
+        },
+        "-K8WbvOS6xq5SR-Jg1ge" : {
+          "date" : 1453336803076,
+          "name" : "ss",
+          "player1" : "playerID_01",
+          "score" : 1
+        },
+        "-K8ar_Tw18-Gth6fAxTA" : {
+          "date" : 1453424793694,
+          "name" : "asd",
+          "player1" : "playerID_01",
+          "score" : 1
+        }
+      },
+      "played" : "",
+      "points" : 100,
+      "profile_image" : "http://gatherngo.tonicdigitalmedia.com/images/user/RobBrennan.png",
+      "rank" : 1,
+      "rated" : 12,
+      "regUser" : "ad3b2a78-7831-4537-a2eb-365c99fb07fa",
+      "results" : "",
+      "tag" : "Its like a nightmare ",
+      "wins" : 48,
+      "winstotal" : 23
+    },
+    "f239c8b4-d520-44fb-8d68-9b7dda0fe9da" : {
+      "date" : 1453152659719,
+      "email" : "st@gmail.com",
+      "firstname" : "Thomas",
+      "lastname" : "Moran",
+      "lost" : 52,
+      "losttotal" : 34,
+      "meetings" : {
+        "-K8M1LXuPksTVvl-l3Tp" : {
+          "date" : 1453159180630,
+          "name" : "ddd",
+          "player1" : "playerID_01",
+          "score" : 1
+        },
+        "-K8MDT2yrdamdqQ5ZHm3" : {
+          "date" : 1453162357156,
+          "name" : "game 01",
+          "player1" : "playerID_01",
+          "score" : 2
+        }
+      },
+      "played" : "",
+      "points" : 100,
+      "profile_image" : "http://gatherngo.tonicdigitalmedia.com/images/user/RobBrennan.png",
+      "rank" : 2,
+      "rated" : 12,
+      "regUser" : "f239c8b4-d520-44fb-8d68-9b7dda0fe9da",
+      "results" : "",
+      "tag" : "He's Dancing",
+      "wins" : 48,
+      "winstotal" : 32
+    }
+  }
+}
