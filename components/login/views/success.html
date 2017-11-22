@@ -1,0 +1,79 @@
+<div class="wrapper" ng-controller="RegistrationController">
+
+    <div class="row ">
+
+    <!--Profile name and image Start -->
+    <div class="row">
+        <div class="small-10 medium-6  columns center" ng-show="currentUser" >
+            <div ng-repeat="bears in bearLists.bearList">
+                <ul>
+                    <li class=" menuList" >
+                        <a ui-sref="app.player">
+                            <div class="small-3 medium-2  columns">
+                                <img class="menuIcon " src="/images/icons/icon.svg">
+                            </div>
+                            <div class="small-6 medium-6 columns">
+                                <h1> {{bears}} </h1>
+                            </div>
+                            <div class="small-3 medium-3 medium-3 columns">
+                                <h1>03</h1>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div ng-controller="ActionCtrl">
+
+            <div class="small-2 columns center">
+                <i ng-click="chosebear();toggleModal()" class="fi-plus"></i>
+            </div>
+
+            <modal show='modalShown'>
+                <div class="container">
+                    <div class="row " style="padding:0px;">
+                        <div class="small-12  columns ">
+                            <p>Chose Bears</p>
+                        </div>
+                    </div>
+
+
+                    <div class="modallist small-12 columns ">
+                        <ul>
+                            <!-- Add To Group -->
+                            <li>
+                                <div class="row" ng-repeat=" bears in bearsList">
+                                    <div class="row">
+                                        <h3>{{bears.name}} </h3>
+                                        <input id="checkbox" type="checkbox"
+                                               ng-click="isChecked(bears.name, checked )"
+                                               ng-model="checked">
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <button ng-click="addbears();toggleModal()">ok</button>
+                </div>
+            </modal>
+        </div>
+    </div>
+
+
+    <!--<div class="row">-->
+    <!--<div class="profile-card" style="margin-top: 350px;-->
+    <!--" ng-show="currentUser" ng-controller="RegistrationController">-->
+    <!--<div class="title">-->
+    <!--<h3>Welcome</h3>-->
+    <!--<h1>{{ currentUser.firstname}}<span><a ng-href="#/login" ng-click="logout()">logout</a>  </span></h1>-->
+
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--</div>-->
+</div> <!--        Wrapper End -->
+    
+    
