@@ -1,0 +1,84 @@
+<!--  MODAL START    -->
+<modal show='modalShown'>
+    <div class="row " style="padding:0px;">
+        <div class="small-12  columns ">
+            <div class="small-2 columns ">
+                <div class="playerinfo">
+                    <img ng-src="{{player.userimage}}">
+                </div>
+            </div>
+
+            <div class="small-8 columns ">
+                <div class="">
+                    <p> {{ player.firstname}} {{ player.lastname}}</p>
+                    <p> rank 12</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--        {{play}}-->
+    <div class="modallist small-12 columns ">
+        <ul>
+            <!-- home-->
+
+
+            <!-- Set Score-->
+            <li>
+                <div class="row">
+                    <a ui-sref="app.playersetscore({ id:player.regUser})">
+                        <div class=" small-2 column">
+                            <i class="fi-graph-bar"></i>
+                        </div>
+                        <div class=" small-10 column">
+                            <h3>Set Score</h3>
+                        </div>
+                    </a>
+                </div>
+            </li>
+
+            <!-- Set Challenge-->
+            <li>
+                <div class="row">
+                    <a ui-sref="app.challenge">
+                        <div class=" small-2 column">
+                            <i class="fi-trophy"></i>
+                        </div>
+                        <div class=" small-10 column">
+                            <h3>Challenge</h3>
+                        </div>
+                    </a>
+                </div>
+            </li>
+
+            <!-- Add To Group -->
+            <li>
+                <div class="row">
+                    <a ui-sref="app.group">
+                        <div class=" small-2 column">
+                            <i class="fi-torsos-all"></i>
+                        </div>
+                        <div class=" small-10 column">
+                            <h3>Add To Group</h3>
+                        </div>
+                    </a>
+                </div>
+            </li>
+
+            <!-- Add To Group -->
+            <li>
+                <div class="row">
+                    <a ui-sref="app.settings">
+                        <div class=" small-2 column">
+                            <i class="fi-widget"></i>
+                        </div>
+                        <div ui-sref="app.settings" class=" small-10 column">
+                            <h3>Statistics</h3>
+                        </div>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</modal>
+<!--MODAL END -->
