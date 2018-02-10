@@ -1,0 +1,36 @@
+<div   ng-if=" note.sender === true "
+       data-alert
+       ng-hide= "note.confirmHide === true">
+
+    <div   class="alert-box send"
+           ng-class="{confirm:confirm }">
+        <div class="row">
+            <div class=" small-3  medium-4 columns" >
+                <img class="img-circle " ng-src="{{note.postImage}}">
+                <!--<h3 class="right">{{note.playerPostFirstName}}  </h3>-->
+            </div>
+            <div class=" small-3 medium-2  columns ">
+                <div class="alert-circle-left blue left"> {{note.notificationWinsRecieve}}</div>
+            </div>
+            <div class=" small-3 medium-2 columns " >
+                <div class="alert-circle-right blue right "> {{note.notificationWinsPost}} </div>
+            </div>
+            <div class=" small-3 medium-4 columns ">
+                <img class="img-circle " ng-src="{{note.recieveImage}}">
+                <!--<h4 class="left">{{note.playerRecieveFirstName}} </h4>-->
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div ng-show="!note.confirmShow" class=" small-12  medium-6  medium-centered columns ">
+            <i class="fi-x " ng-click="deleteMeeting(key)"></i>
+            <i class="fi-eye "></i>
+        </div>
+        <div ng-show="note.confirmShow" class=" small-12  medium-12 medium-centered columns">
+            <h5 style="color:white;">"{{note.postTag}}"</h5><i class="fi-x " ng-click="confirmHide(key, note)"></i>
+
+        </div>
+    </div>
+</div>
