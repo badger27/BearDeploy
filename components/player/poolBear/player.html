@@ -1,0 +1,170 @@
+<!--PROFILE CARD START-->
+<div class="row" ng-controller="RegistrationController">
+    <tb-profiles-card theme ="{{theme}} "></tb-profiles-card>
+</div>
+
+
+<!--STATISTIC START -->
+<tb-statistic></tb-statistic>
+
+
+
+
+
+     <!--MENU START-->
+      <div  class="row ">
+       <div class="small-12 medium-6  columns">
+         <div class="small-2 medium-2 columns "><p>W/L</p></div>
+         <div class="small-6 columns ">
+             <span ng-include="'components/player/pool/_partials/filterDropdown.tpl.html'"></span>
+         </div>             
+         <div class="small-2  medium-2 columns " style="text-align:right"><p>Info </p></div>
+         <div class="small-2 medium-2  columns " style="text-align:right"><p>Action </p></div>
+        </div>
+      </div>
+      <!--MENU END -->
+
+
+<div class="row"
+     style="padding:0px;"
+     ng-show="currentUser"
+     ng-repeat="(key,player) in players | orderBy:player.wins "
+     ng-controller='ActionCtrl'>
+
+    <div class="small-12 medium-6 columns" ng-class-odd="'odd'" ng-class-even="'even'">
+
+
+        <!--PLAYER LIST START-->
+        <ul class="player-ul">
+            <li class="player-list">
+
+
+
+              <!--SCORE START   -->
+                <div class=" players-item small-2 columns">
+                    <tb-player-score></tb-player-score>
+                </div>
+                <!--SCORE END -->
+
+
+
+
+
+                <!--PLAYER USER IMAGE START-->
+                <div class="small-2 columns ">
+                    <div class="playerinfo">
+                        <a ui-sref="app.playerdetails({ id: player.regUser})">
+                            <div class="menu-image">
+                                <div class="poster">
+                                    <img ng-src="{{player.userimage}}">
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+
+
+                <div class=" players-item small-4 columns">
+                    <div class="player-info ">
+                        <div class="player-name">
+
+                        <span ng-if="filterSet === 1 ||  filterSet === 0">
+                            <h6>{{player.firstname}} {{player.lastname}}</h6>
+                        </span>
+
+                            <span ng-if="filterSet === 2 ">
+                            <p>{{player.playerFirstname}} {{player.playerLastname}}</p>
+                        </span>
+
+
+
+                            <div class="row">
+                                <div style="margin-left: .75rem;" angular-rating
+                                     ng-model='rating.value'
+                                     max={{maxValue}}
+                                     default-value=5
+                                     icon-empty="fa-star-o"
+                                     icon-full="fa-star"
+                                     icon-hover="fa-star"
+                                     color-base="black"
+                                     color-selected="#de0c53"
+                                     color-hover="#de0c53"
+                                     icon-size="13"
+                                     on-change="fn()"
+                                     decimal>
+
+                                </div>
+                                <!--<div>Rating: {{rating.value}}</div>-->
+
+                            </div>
+
+
+
+
+
+                            <!--<span class=""><p>Rated: {{player.rated}}</p></span>-->
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="small-1 columns ">
+                    <div class="challenge">
+                        <!--             <img src="images/svg/badge.svg">-->
+                    </div>
+                </div>
+
+                <div class=" players-item small-2 columns   ">
+                    <ul class="player-result">
+                        <li><span><img src="images/svg/win.svg"></span><a class="number" href="">{{player.wins}}</a>
+                        </li>
+                        <li><span><img src="images/svg/loss.svg"></span><a class="number" href="">{{player.lost}}</a>
+                        </li>
+                        <li><span><img src="images/svg/points.svg"></span><a class="number"
+                                                                             href="">{{player.points}}</a></li>
+                    </ul>
+                </div>
+
+                <div class="small-1 columns ">
+                    <div class="action">
+                        <img src="/images/svg/action.svg"
+                             ng-click='toggleModal()'
+                             style="align:right; text-decoration:none;">
+
+                    </div>
+                </div>
+
+            </li>
+        </ul>
+        <!--PLAYER LIST END-->
+    </div>
+    <!--          </article>-->
+    <!--      </div>-->
+
+    <!--<div  ng-controller="RatingController as rating" class="container">-->
+    <!--<h1>Angular Star Rating Directive</h1>-->
+    <!--<div star-rating ng-model="rating.rating1" max="10" on-rating-select="rating.rateFunction(rating)"></div>-->
+    <!--<star-rating ng-model="rating.rating2" readonly="rating.isReadonly"></star-rating>-->
+    <!--<label>-->
+    <!--<input type="checkbox" ng-model="rating.isReadonly"/>-->
+    <!--Is Readonly-->
+    <!--</label>-->
+
+    <!--<div><strong>Rating 1:</strong> {{rating.rating1}}</div>-->
+    <!--<div><strong>Rating 2:</strong> {{rating.rating2}}</div>-->
+    <!--</div>-->
+
+
+    <!--MODAL START-->
+    <tb-modal></tb-modal>
+
+
+
+
+</div>
+
+
+
+
