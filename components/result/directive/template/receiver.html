@@ -1,0 +1,48 @@
+<!--RECIEVER START -->
+<div ng-if=" note.sender === false "
+     data-alert
+     ng-hide="note.confirmHide === true">
+
+
+    <div   ng-class="{'confirm':note.confirmShow}"
+           class="alert-box recieve ">
+        <div class="row">
+            <div class=" small-3  medium-4 columns">
+                <img class="img-circle " ng-src="{{note.postImage}}">
+                <!--<h6 style="color:white" class="right">{{note.playerRecieveFirstName}} {{note.playerRecievelasttName}}</h6>-->
+            </div>
+            <div class=" small-3  medium-2 columns ">
+                <div class="alert-circle-left blue left"> {{note.notificationWinsPost}}</div>
+            </div>
+            <div class=" small-3  medium-2 columns ">
+                <div class="alert-circle-right blue right "> {{note.notificationWinsRecieve}}</div>
+            </div>
+            <div class=" small-3  medium-4 columns ">
+                <img class="img-circle " ng-src="{{note.recieveImage}}">
+                <!--<h6 style="color:white" class="left">{{note.playerPostFirstName}}</h6>-->
+            </div>
+        </div>
+
+        <div class="row">
+            <h5 ng-if="note.confirmShow" style=" color:white;">"Confirm"</h5>
+            <h5 ng-if="!note.confirmShow " style=" color:white;">"Pending"</h5>
+        </div>
+
+    </div>
+    <!--{{currentUser.$id}}-->
+
+    <div class="row">
+        <div ng-show="!note.confirmShow" class=" small-12  medium-6  medium-centered columns ">
+            <span></span><i class="fi-check" ng-click="confirmScoreTrigger(key,note)"></i>
+            <span></span><i class="fi-x-circle" ng-click="deleteMeeting(key)"></i>
+
+        </div>
+        <div ng-show="note.confirmShow">
+            <div class=" small-12  medium-12 medium-centered columns ">
+                <i ng-click="confirmHide(key, note)" class="fi-x-circle"></i>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--RECIEVER END-->
