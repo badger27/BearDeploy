@@ -1,0 +1,258 @@
+(function(){
+"use strict";
+
+    angular.module("poolBear.player")
+
+        .config(function ($stateProvider) {
+
+            $stateProvider
+        .state('app.playersetscore', {
+            url: '/player/setscore/:id',
+            data: {title: 'Set Score'},
+            views: {
+                'main': {
+
+                    controller: 'SetScoreController',
+                    templateUrl: 'components/player/views/_setscore.html',
+
+                    //This code restricts access to logged in users only
+                    resolve: {
+                        currentAuth: function (Authentication) {
+                            return Authentication.requireAuth();
+                        } //current Auth
+                    } //resolve
+
+
+                }
+            }
+        })
+        })
+        .controller('SetScoreController',
+            ['$scope', '$rootScope', '$firebaseAuth', '$firebaseArray', 'FIREBASE_URL', '$firebaseObject', '$stateParams', '$state', 'confirmScoreService',
+                function ($scope, $rootScope, $firebaseAuth, $firebaseArray, FIREBASE_URL, $firebaseObject, $stateParams, $state, confirmScoreService) {
+
+                 console.log("SetScoreController Fired" + $rootScope.currentUser.$id);
+
+
+                    // CONNECT TO FIREBASE
+                    let ref = new Firebase(FIREBASE_URL);
+                    var auth = $firebaseAuth(ref);
+
+
+
+                    auth.$onAuth(function (authUser) {
+                        if (authUser) {
+
+                            // $scope.messageShow;
+                            //****************************
+                            // Notificatoin Post
+                            // notificationRef is the location
+                            // where the new Score Notifications
+                            // are placed
+                            //***********************************
+                            //   showMessage();
+
+
+                            let notificationRef = new Firebase(FIREBASE_URL + 'bears/poolbear/notification/' + $rootScope.currentUser.$id);
+                            let notificationInfoPost = $firebaseArray(notificationRef);
+                            //
+                            // $scope.notifications = notificationInfoPost;
+                            //      Loads Current Posts
+
+
+                            // // ENSURES THAT POSTS ARE LOADED ON THE PAGE LOAD
+                            // notificationInfoPost.$loaded().then(function (data) {console.log("$loaded fired" );
+                            //     console.log("$loaded fired" );
+                            //     $rootScope.howManyNotification = notificationInfoPost.length;
+                            //
+                            // }); //Make sure meeting data is loaded
+                            //
+                            // notificationInfoPost.$watch(function (data) {
+                            //     console.log("$watch fired" );
+                            //     $rootScope.howManyNotification = notificationInfoPost.length;
+                            // });
+
+
+                            //*******************
+                            // Notification Recieve: Below covers
+                            // all the elements  required to populate
+                            // the player recieving the notification
+                            //*********************
+
+                            //GETS PLAYER OBJECT START
+                            let setScorePlayerUserId = $stateParams.id;
+                            //create reference to get players detail
+                            let PlayerRecieveRef = new Firebase(FIREBASE_URL + 'bears/poolbear/users/' +
+                                setScorePlayerUserId);
+                            let playerRecieveInfo = $firebaseObject(PlayerRecieveRef);
+                            // $scope.playerRecieveScore = playerRecieveInfo;
+                            // $scope.currentBearObject= playerRecieveInfo;
+
+                            var notificationRefRecieve = new Firebase(FIREBASE_URL + 'bears/poolbear/notification/' +
+                                //player clicked here
+                                setScorePlayerUserId);
+                            //       $firebaseArray creates an empty array and placed using the reference create above
+                            var notificationInfoRecieve = $firebaseArray(notificationRefRecieve);
+
+
+                            // notificationInfoRecieve.$loaded().then(function (data) {
+                            //     $rootScope.howManyNotification = notificationInfoRecieve.length;
+                            //
+                            // });
+                            //Make sure meeting data is loaded
+
+                            // notificationInfoRecieve.$watch(function (data) {
+                            //     $rootScope.howManyNotification = notificationInfoRecieve.length;
+                            //
+                            // });
+
+
+                            // The addNotification function pushes
+                            // Alerts to both the
+                            $scope.addNotification = function (type) {
+
+                                // $scope.playerPostFirstNameRef = $rootScope.currentUser.firstname;
+                                // $scope.playerPostLastNameRef = $rootScope.currentUser.lastname;
+
+
+                                $scope.totalGame = $scope.notificationWinsPost + $scope.notificationWinsRecieve;
+
+                                console.log("$scope.notificationWinsPost" , $scope.notificationWinsPost);
+                                console.log("$scope.notificationWinsRecieve" ,  $scope.notificationWinsRecieve);
+
+
+                                // $scope.playerPostLost = $scope.totalGame - $scope.notificationWinsPost;
+                                // $scope.playerRecieveLost = $scope.totalGame - $scope.notificationWinsRecieve;
+
+
+                                //        ADD nofitication to post
+                                notificationInfoPost.$add({
+                                    playerPostLost: $scope.totalGame - $scope.notificationWinsPost,
+                                    playerRecieveLost: $scope.totalGame - $scope.notificationWinsRecieve,
+                                    notificationWinsPost: $scope.notificationWinsPost,
+                                    notificationWinsRecieve: $scope.notificationWinsRecieve,
+                                    playerPostFirstName: $rootScope.currentUser.firstname,
+                                    playerPostlastName: $rootScope.currentUser.lastname,
+                                    playerRecieveFirstName: playerRecieveInfo.firstname,
+                                    playerRecieveLastName: playerRecieveInfo.lastname,
+                                    postImage: $rootScope.currentUser.userimage,
+                                    recieveImage: playerRecieveInfo.userimage,
+
+
+                                    postTag: $rootScope.currentUser.tagline,
+                                    recieveTag: playerRecieveInfo.tagline,
+
+                                    playerRecieveUserId: setScorePlayerUserId,
+                                    totalGame: $scope.totalGame,
+                                    confirmed: true,
+                                    collapse: false,
+                                    sender: true,
+                                    confirmShow: false,
+                                    confirmHide: false,
+                                    date: Firebase.ServerValue.TIMESTAMP
+
+
+                                }).then(function (notificationRef) {
+
+                                    //          passes the result key reference into the sendesrnotification
+                                    var resultId = notificationRef.key();
+                                    var result = new Firebase(FIREBASE_URL + 'bears/poolbear/notification/' +
+                                        $rootScope.currentUser.$id + '/' + resultId);
+
+                                    var notificationInfoPostresult = $firebaseArray(result);
+                                    notificationInfoPostresult.$add({
+                                        resultID: resultId
+                                    });
+
+
+                                    //         Add post to reciever
+                                    notificationInfoRecieve.$add({
+                                        resultID: resultId,
+                                        playerPostLost: $scope.totalGame - $scope.notificationWinsPost,
+                                        playerRecieveLost: $scope.totalGame - $scope.notificationWinsRecieve,
+                                        notificationWinsPost: $scope.notificationWinsPost,
+                                        notificationWinsRecieve: $scope.notificationWinsRecieve,
+                                        playerRecieveFirstName: playerRecieveInfo.firstname,
+                                        playerRecieveLastName: playerRecieveInfo.lastname,
+                                        postImage: playerRecieveInfo.userimage,
+                                        recieveImage: $rootScope.currentUser.userimage,
+
+
+                                        postTag: playerRecieveInfo.tagline,
+                                        recieveTag: $rootScope.currentUser.tagline,
+                                        playerPostFirstName: $rootScope.currentUser.firstname,
+                                        playerPostlastName: $rootScope.currentUser.lastname,
+                                        playerPostUserId: $rootScope.currentUser.$id,
+                                        totalGame: $scope.totalGame,
+                                        confirmed: false,
+                                        collapse: false,
+                                        sender: false,
+                                        confirmShow: false,
+                                        confirmHide: false,
+                                        date: Firebase.ServerValue.TIMESTAMP
+
+
+                                    }).then(function (notificationRefRecieve) {
+
+                                        var resultIdref = notificationRefRecieve.key();
+                                        var resultref = new Firebase(FIREBASE_URL + 'bears/poolbear/notification/' +
+                                            setScorePlayerUserId + '/' + resultIdref);
+
+                                        var notificationInfoPostresultref = $firebaseArray(resultref);
+                                        notificationInfoPostresultref.$add({
+                                            resultID: resultIdref
+                                        })
+                                    })
+
+                                    $scope.notificationWinsPost = '';
+                                    $scope.notificationWinsRecieve = '';
+
+                                }); //promise
+
+                            }; // addMeeting
+
+
+                            // $scope.confirmHide = function (key, note) {
+                            //     var confirmHideRef = new Firebase(FIREBASE_URL + 'bears/poolbear/notification/' + $rootScope.currentUser.$id + '/' + note.$id);
+                            //     confirmHideRef.update({confirmHide: true});
+                            //     showMessage();
+                            // }; //confirm Hide
+                            //
+                            //
+                            // var showMessage = function () {
+                            //     notificationInfoPost.$loaded().then(function (data) {
+                            //         var noteTotal = notificationInfoPost.length;
+                            //         var hiddenNotes = _.filter(data, function (item) {
+                            //             return item.confirmHide == true;
+                            //         });
+                            //         var hiddenNotesTotal = hiddenNotes.length;
+                            //
+                            //         if (hiddenNotesTotal === noteTotal) {
+                            //             $scope.messageShow = true;
+                            //
+                            //
+                            //         } else {
+                            //             $scope.messageShow = false;
+                            //         }
+                            //
+                            //     }); //Make sure meeting data is loaded
+                            // };
+                            //
+                            // showMessage();
+
+
+
+
+                            // $scope.confirmScoreTrigger = function (key, note) {
+                            //     confirmScoreService.confirmScore(key, note, $rootScope.currentUser.$id);
+                            // }; // confirm
+
+
+                        } // User Authenticated
+                    }); // on Auth
+                }])
+
+
+}());
+
+
