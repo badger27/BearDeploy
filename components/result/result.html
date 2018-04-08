@@ -1,0 +1,31 @@
+<!--<link href="http://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel="stylesheet">-->
+
+<div class="small-10 small-centered   columns" >
+   
+    <div class="wrapper"  >
+
+         <div ng-if="messageShow" class="title">
+             <i class="fi-graph-bar"></i>
+           <h3 >You have no notifications</h3>
+         </div>
+
+        <!--RESULTS NOTICATIONS  START -->
+        <div    class="row" ng-repeat="(key, note) in notifications" >
+            <!--START SEND   START-->
+            <tb-sender></tb-sender>
+            <!--START RECIEVE  START-->
+            <tb-receiver></tb-receiver>
+        </div>
+        <!--NG REPEAT END -->
+
+        <!-- RECIEVE  NOTICATIONS  END -->
+    </div>
+</div>
+
+
+      
+ 
+
+  <!--<alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>-->
+
+

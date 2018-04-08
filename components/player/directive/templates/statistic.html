@@ -1,0 +1,85 @@
+
+
+<div ng-class="theme">
+<div  class="row">
+
+    <div class="small-3 columns center" >
+
+        <div class="card-profile-stats-container center">
+            <div class="card-profile-stats-statistic">
+                <div class="circle">
+                    <div class="circle__inner">
+                        <div class="circle__wrapper">
+                            <a ui-sref="app.wins">
+                            <h3 class="circle__content">{{currentBearObject.wins}}</h3>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <p >Wins</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="small-3 columns" >
+        <div class="card-profile-stats-container">
+            <div class="card-profile-stats-statistic">
+                <div class="circle">
+                    <div class="circle__inner">
+                        <div class="circle__wrapper">
+                            <a ui-sref="app.lost">
+                            <h3 class="circle__content">{{currentBearObject.lost}}</h3>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+                <p>Lost</p>
+
+            </div> <!-- /.card-profile-stats-statistic -->
+        </div>
+    </div>
+
+
+    <div class="small-3 columns" >
+        <div class="card-profile-stats-container">
+            <div class="card-profile-stats-statistic">
+
+                <div class="circle">
+                    <div class="circle__inner">
+                        <div class="circle__wrapper">
+                            <a ui-sref="app.challenge">
+                            <h3 class="circle__content">0</h3>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <p>Chall</p>
+
+            </div> <!-- /.card-profile-stats-statistic -->
+        </div>
+    </div>
+
+
+
+
+
+    <div class="small-3 columns" >
+        <div class="card-profile-stats-statistic">
+            <div class="circle">
+                <div class="circle__inner">
+                    <div class="circle__wrapper">
+                        <a ui-sref="app.decline">
+                            <h3 class="circle__content">0</h3>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <p>Dec</p>
+        </div> <!-- /.card-profile-stats-statistic -->
+    </div> <!-- /.card-profile-stats-container -->
+
+</div>
+
+</div>
