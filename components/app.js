@@ -22,8 +22,7 @@ var poolBear= angular.module('poolBear', [
     'poolbear.confirmServices',
     'themeConfig',
     'services.menu',
-    'slickCarousel',
-    'slickExampleApp'
+    'slickCarousel'
 
 
  ]).run(
