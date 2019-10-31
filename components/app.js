@@ -1,3 +1,4 @@
+'use strict';
 var poolBear= angular.module('poolBear', [
     'firebase',
     'ui.router',

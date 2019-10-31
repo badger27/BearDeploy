@@ -1,7 +1,6 @@
 
     'use strict';
 
-
     angular.module( 'poolBear.player')
 .directive('tbModal', function() {
   return {
