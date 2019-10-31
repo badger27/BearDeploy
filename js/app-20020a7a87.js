@@ -133,71 +133,6 @@ var poolBear= angular.module('poolBear', [
 
     
 
-"use strict";
-angular.module('poolBear.bio', [])
-    .config(function ($stateProvider) {
-
-        $stateProvider
-            .state('app.bio', {
-                url: '/bio',
-                data: {title: 'bio'},
-                views: {
-                    'main': {
-                        controller: 'bioController',
-                        templateUrl: 'components/bio/bio.html',
-
-                        //This code restricts access to logged in users only
-                        resolve: {
-                            currentAuth: function (Authentication) {
-                                return Authentication.requireAuth();
-                            } //current Auth
-                        } //resolve
-                    }
-                }
-            })
-    })
-
-
-    .controller('bioController',
-        ['$scope', '$rootScope', '$firebaseAuth', '$firebaseArray', '$firebaseObject', 'FIREBASE_URL', 'firebaseDataService',
-            function ($scope, $rootScope, $firebaseAuth, $firebaseArray, $firebaseObject, FIREBASE_URL, firebaseDataService) {
-                console.log("BIO FIRED");
-
-            }])
-'use strict';
-angular.module('poolBear.chat', [
-    
-   
-])
-.config(function ($stateProvider) {
-
-    $stateProvider
-      .state('app.chat', {
-           
-          
-          url: '/chat',
-          data: { title: 'Chat' },
-          views: {
-              'main': {
-                  controller: 'chatCtrl',
-                  templateUrl: 'components/chat/template/chat.html'
-
-
-              }
-          }
-
-
-      })
-    
-}).controller('chatCtrl', ['$scope', function chatCtrl($scope) {
-
-    $scope.comingSoon = "Coming Soom ";
-    
-
-  }]);
-      
-
-
 'use strict';
 angular.module('poolBear.geo', [
     
@@ -278,6 +213,71 @@ angular.module('poolBear.geo', [
 //      });
 //    };
 //  }]);
+
+"use strict";
+angular.module('poolBear.bio', [])
+    .config(function ($stateProvider) {
+
+        $stateProvider
+            .state('app.bio', {
+                url: '/bio',
+                data: {title: 'bio'},
+                views: {
+                    'main': {
+                        controller: 'bioController',
+                        templateUrl: 'components/bio/bio.html',
+
+                        //This code restricts access to logged in users only
+                        resolve: {
+                            currentAuth: function (Authentication) {
+                                return Authentication.requireAuth();
+                            } //current Auth
+                        } //resolve
+                    }
+                }
+            })
+    })
+
+
+    .controller('bioController',
+        ['$scope', '$rootScope', '$firebaseAuth', '$firebaseArray', '$firebaseObject', 'FIREBASE_URL', 'firebaseDataService',
+            function ($scope, $rootScope, $firebaseAuth, $firebaseArray, $firebaseObject, FIREBASE_URL, firebaseDataService) {
+                console.log("BIO FIRED");
+
+            }])
+'use strict';
+angular.module('poolBear.chat', [
+    
+   
+])
+.config(function ($stateProvider) {
+
+    $stateProvider
+      .state('app.chat', {
+           
+          
+          url: '/chat',
+          data: { title: 'Chat' },
+          views: {
+              'main': {
+                  controller: 'chatCtrl',
+                  templateUrl: 'components/chat/template/chat.html'
+
+
+              }
+          }
+
+
+      })
+    
+}).controller('chatCtrl', ['$scope', function chatCtrl($scope) {
+
+    $scope.comingSoon = "Coming Soom ";
+    
+
+  }]);
+      
+
 
 'use strict';
 angular.module('poolBear.challenge', [
@@ -539,6 +539,222 @@ angular.module('poolBear.player', [
 
 
 'use strict';
+angular.module('poolBear.search', [
+   
+ 
+    
+   
+])
+.config(function ($stateProvider) {
+
+    $stateProvider
+      .state('app.search', {
+           
+          
+          url: '/search',
+          data: { title: 'Search' },
+          views: {
+              'main': {
+                  controller: 'SearchCtrl',
+                  templateUrl: 'components/search/search.html'
+
+
+              }
+          }
+
+
+      })
+    
+}).controller('SearchCtrl', function SearchCtrl($scope) {
+    
+    
+    
+});
+
+
+'use strict';
+angular.module('poolBear.result', [
+    
+'poolBear.login',
+'poolBear.player',
+
+])
+.config(function ($stateProvider) {
+
+    $stateProvider
+      .state('app.result', {
+           
+        
+          url: '/result',
+          data: { title: 'Result' },
+          views: {
+              'main': {
+                  controller: 'ResultCtrl',
+                  templateUrl: 'components/result/result.html',
+
+                                    //This code restricts access to logged in users only 
+                     resolve: {
+          currentAuth: function(Authentication) {
+          return Authentication.requireAuth();
+        } //current Auth
+      } //resolve
+              }
+          }
+
+
+      })
+    
+}).controller('ResultCtrl',
+
+               ['$scope', '$rootScope', '$firebaseAuth', '$firebaseArray', 'FIREBASE_URL', '$firebaseObject', '$stateParams', '$state', 'confirmScoreService', 'firebaseDataService',
+        function ($scope, $rootScope, $firebaseAuth, $firebaseArray, FIREBASE_URL, $firebaseObject, $stateParams, $state, confirmScoreService, firebaseDataService) {
+          console.log('RESULT-CTRL FIRED');
+
+
+            // CONNECT TO FIREBASE
+            // let ref = new Firebase(FIREBASE_URL);
+            // var auth = $firebaseAuth(ref);
+
+            var auth = firebase.auth();
+            var database = firebase.database();
+
+
+            auth.onAuthStateChanged(function (authUser) {
+                if (authUser) {
+                    $scope.test = "test";
+                    $scope.messageShow;
+
+
+
+                    //GET PLAYERS START
+                    function getNotification() {
+                        firebaseDataService.getNotifications(function (playersArray) {
+                            console.log("playersArray", playersArray);
+                            console.log(typeof playersArray );
+                           $scope.notifications  = playersArray;
+                        })
+                    }
+
+                    getNotification();
+
+                   //  let userId = firebase.auth().currentUser.uid;
+                   //  let notificationRef = database.ref('bears/poolbear/notification/' + userId);
+                   //
+                   //
+                   // notificationRef.once('value', function(snapshot) {
+                   //
+                   //      var notificationsList = (snapshot.val() && snapshot.val()) || 'Anonymous';
+                   //      console.log("notificationsList", notificationsList);
+                   //
+                   //      let returnArr= [];
+                   //
+                   //      snapshot.forEach(childSnapshot => {
+                   //          let item = childSnapshot.val();
+                   //          item.key = childSnapshot.key;
+                   //          returnArr.push(item);
+                   //      });
+                   //
+                   //     $scope.notifications = "new 2";
+                   // });
+
+
+
+
+                    // let notificationRef = new Firebase(FIREBASE_URL + 'bears/poolbear/notification/' + userId);
+                    // let notificationInfoPost = $firebaseArray(notificationRef);
+
+                    // $scope.notifications = notificationInfoPost;
+
+
+
+
+                    //GETS PLAYER OBJECT START
+                    // let setScorePlayerUserId = $stateParams.id;
+                    //
+                    // let PlayerRecieveRef = new Firebase(FIREBASE_URL + 'bears/poolbear/users/' +
+                    //     setScorePlayerUserId);
+                    // let playerRecieveInfo = $firebaseObject(PlayerRecieveRef);
+                    // $scope.playerRecieveScore = playerRecieveInfo;
+
+                    // ENSURES THAT POSTS ARE LOADED ON THE PAGE LOAD
+                    // notificationInfoPost.$loaded().then(function (data) {console.log("$loaded fired" );
+                    //     console.log("$loaded fired" );
+                    //     $rootScope.howManyNotification = notificationInfoPost.length;
+                    //
+                    // });
+                    //Make sure meeting data is loaded
+
+                    // notificationInfoPost.$watch(function (data) {
+                    //     console.log("$watch fired" );
+                    //     $rootScope.howManyNotification = notificationInfoPost.length;
+                    // });
+
+
+                    // $scope.confirmHide = function (key, note) {
+                    //     var confirmHideRef = new Firebase(FIREBASE_URL + 'bears/poolbear/notification/' + $rootScope.currentUser.$id + '/' + note.$id);
+                    //     confirmHideRef.update({confirmHide: true});
+                    //     showMessage();
+                    // };
+                    //confirm Hide
+
+
+                    // var showMessage = function () {
+                    //     notificationInfoPost.$loaded().then(function (data) {
+                    //         var noteTotal = notificationInfoPost.length;
+                    //         var hiddenNotes = _.filter(data, function (item) {
+                    //             return item.confirmHide == true;
+                    //         });
+                    //         var hiddenNotesTotal = hiddenNotes.length;
+                    //
+                    //         if (hiddenNotesTotal === noteTotal) {
+                    //             $scope.messageShow = true;
+                    //
+                    //
+                    //         } else {
+                    //             $scope.messageShow = false;
+                    //         }
+                    //
+                    //     }); //Make sure meeting data is loaded
+                    // };
+
+                    // showMessage();
+
+                    //TO DO
+                    // $scope.deleteMeeting = function (key) {
+                    //
+                    //     notificationInfoPost.$remove(key);
+                    // }; // deleteMeeting
+                    //
+                    // $scope.confirmedHide = true;
+                    //
+                    //
+                    // $scope.confirmScoreTrigger = function (key, note) {
+                    //     confirmScoreService.confirmScore(key, note, $rootScope.currentUser.$id);
+                    // };
+                    // confirm
+
+
+
+                } // User Authenticated
+            }); // on Auth
+        }])
+
+//
+// $scope.alerts = [
+//     { type: 'danger', msg: 'Oh snap! Change a few things up and try submitting again.' },
+//     { type: 'success round', msg: 'Well done! You successfully read this important alert message.' }
+//   ];
+//
+//   $scope.addAlert = function() {
+//     $scope.alerts.push({msg: "Another alert!"});
+//   };
+//
+//   $scope.closeAlert = function(index) {
+//     $scope.alerts.splice(index, 1);
+//   };
+    
+
+'use strict';
 angular.module('poolBear.login', [
 
     'ngFileUpload',
@@ -737,285 +953,8 @@ angular.module('poolBear.Images', [ 'ngFileUpload'
          
 
 
-'use strict';
-angular.module('poolBear.result', [
-    
-'poolBear.login',
-'poolBear.player',
 
-])
-.config(function ($stateProvider) {
-
-    $stateProvider
-      .state('app.result', {
-           
-        
-          url: '/result',
-          data: { title: 'Result' },
-          views: {
-              'main': {
-                  controller: 'ResultCtrl',
-                  templateUrl: 'components/result/result.html',
-
-                                    //This code restricts access to logged in users only 
-                     resolve: {
-          currentAuth: function(Authentication) {
-          return Authentication.requireAuth();
-        } //current Auth
-      } //resolve
-              }
-          }
-
-
-      })
-    
-}).controller('ResultCtrl',
-
-               ['$scope', '$rootScope', '$firebaseAuth', '$firebaseArray', 'FIREBASE_URL', '$firebaseObject', '$stateParams', '$state', 'confirmScoreService', 'firebaseDataService',
-        function ($scope, $rootScope, $firebaseAuth, $firebaseArray, FIREBASE_URL, $firebaseObject, $stateParams, $state, confirmScoreService, firebaseDataService) {
-          console.log('RESULT-CTRL FIRED');
-
-
-            // CONNECT TO FIREBASE
-            // let ref = new Firebase(FIREBASE_URL);
-            // var auth = $firebaseAuth(ref);
-
-            var auth = firebase.auth();
-            var database = firebase.database();
-
-
-            auth.onAuthStateChanged(function (authUser) {
-                if (authUser) {
-                    $scope.test = "test";
-                    $scope.messageShow;
-
-
-
-                    //GET PLAYERS START
-                    function getNotification() {
-                        firebaseDataService.getNotifications(function (playersArray) {
-                            console.log("playersArray", playersArray);
-                            console.log(typeof playersArray );
-                           $scope.notifications  = playersArray;
-                        })
-                    }
-
-                    getNotification();
-
-                   //  let userId = firebase.auth().currentUser.uid;
-                   //  let notificationRef = database.ref('bears/poolbear/notification/' + userId);
-                   //
-                   //
-                   // notificationRef.once('value', function(snapshot) {
-                   //
-                   //      var notificationsList = (snapshot.val() && snapshot.val()) || 'Anonymous';
-                   //      console.log("notificationsList", notificationsList);
-                   //
-                   //      let returnArr= [];
-                   //
-                   //      snapshot.forEach(childSnapshot => {
-                   //          let item = childSnapshot.val();
-                   //          item.key = childSnapshot.key;
-                   //          returnArr.push(item);
-                   //      });
-                   //
-                   //     $scope.notifications = "new 2";
-                   // });
-
-
-
-
-                    // let notificationRef = new Firebase(FIREBASE_URL + 'bears/poolbear/notification/' + userId);
-                    // let notificationInfoPost = $firebaseArray(notificationRef);
-
-                    // $scope.notifications = notificationInfoPost;
-
-
-
-
-                    //GETS PLAYER OBJECT START
-                    // let setScorePlayerUserId = $stateParams.id;
-                    //
-                    // let PlayerRecieveRef = new Firebase(FIREBASE_URL + 'bears/poolbear/users/' +
-                    //     setScorePlayerUserId);
-                    // let playerRecieveInfo = $firebaseObject(PlayerRecieveRef);
-                    // $scope.playerRecieveScore = playerRecieveInfo;
-
-                    // ENSURES THAT POSTS ARE LOADED ON THE PAGE LOAD
-                    // notificationInfoPost.$loaded().then(function (data) {console.log("$loaded fired" );
-                    //     console.log("$loaded fired" );
-                    //     $rootScope.howManyNotification = notificationInfoPost.length;
-                    //
-                    // });
-                    //Make sure meeting data is loaded
-
-                    // notificationInfoPost.$watch(function (data) {
-                    //     console.log("$watch fired" );
-                    //     $rootScope.howManyNotification = notificationInfoPost.length;
-                    // });
-
-
-                    // $scope.confirmHide = function (key, note) {
-                    //     var confirmHideRef = new Firebase(FIREBASE_URL + 'bears/poolbear/notification/' + $rootScope.currentUser.$id + '/' + note.$id);
-                    //     confirmHideRef.update({confirmHide: true});
-                    //     showMessage();
-                    // };
-                    //confirm Hide
-
-
-                    // var showMessage = function () {
-                    //     notificationInfoPost.$loaded().then(function (data) {
-                    //         var noteTotal = notificationInfoPost.length;
-                    //         var hiddenNotes = _.filter(data, function (item) {
-                    //             return item.confirmHide == true;
-                    //         });
-                    //         var hiddenNotesTotal = hiddenNotes.length;
-                    //
-                    //         if (hiddenNotesTotal === noteTotal) {
-                    //             $scope.messageShow = true;
-                    //
-                    //
-                    //         } else {
-                    //             $scope.messageShow = false;
-                    //         }
-                    //
-                    //     }); //Make sure meeting data is loaded
-                    // };
-
-                    // showMessage();
-
-                    //TO DO
-                    // $scope.deleteMeeting = function (key) {
-                    //
-                    //     notificationInfoPost.$remove(key);
-                    // }; // deleteMeeting
-                    //
-                    // $scope.confirmedHide = true;
-                    //
-                    //
-                    // $scope.confirmScoreTrigger = function (key, note) {
-                    //     confirmScoreService.confirmScore(key, note, $rootScope.currentUser.$id);
-                    // };
-                    // confirm
-
-
-
-                } // User Authenticated
-            }); // on Auth
-        }])
-
-//
-// $scope.alerts = [
-//     { type: 'danger', msg: 'Oh snap! Change a few things up and try submitting again.' },
-//     { type: 'success round', msg: 'Well done! You successfully read this important alert message.' }
-//   ];
-//
-//   $scope.addAlert = function() {
-//     $scope.alerts.push({msg: "Another alert!"});
-//   };
-//
-//   $scope.closeAlert = function(index) {
-//     $scope.alerts.splice(index, 1);
-//   };
-    
-
-'use strict';
-angular.module('poolBear.search', [
-   
- 
-    
-   
-])
-.config(function ($stateProvider) {
-
-    $stateProvider
-      .state('app.search', {
-           
-          
-          url: '/search',
-          data: { title: 'Search' },
-          views: {
-              'main': {
-                  controller: 'SearchCtrl',
-                  templateUrl: 'components/search/search.html'
-
-
-              }
-          }
-
-
-      })
-    
-}).controller('SearchCtrl', function SearchCtrl($scope) {
-    
-    
-    
-});
-
-
-'use strict';
-angular.module('poolBear.settings', [
-    
-   
-])
-.config(function ($stateProvider) {
-
-    $stateProvider
-      .state('app.settings', {
-           
-          
-          url: '/settings',
-          data: { title: 'Settings' },
-          views: {
-              'main': {
-                  controller: 'SettingsCtrl',
-                  templateUrl: 'components/settings/settings.html'
-
-
-              }
-          }
-
-
-      })
-    
-}).controller('SettingsCtrl',
-
-           ['$scope', '$rootScope', 'Authentication', '$state','$location', '$firebaseArray','FIREBASE_URL', '$firebaseObject', '$firebaseAuth',
-
-        function($scope,$rootScope, Authentication, $state, $location,$firebaseArray , FIREBASE_URL, $firebaseObject, $firebaseAuth) {
-
-        var ref = new Firebase(FIREBASE_URL);
-        var auth = $firebaseAuth(ref);
-
-
-        auth.$onAuth(function (authUser) {
-            if (authUser) {
-
-                var mainPlayerInfo;
-                //Variable
-
-                var PlayerRef = new Firebase(FIREBASE_URL + 'users/' +  $rootScope.currentUser.$id);
-                PlayerRef.on('value', function(snap){
-                    console.log("snap" , snap.val());
-
-                    mainPlayerInfo = snap.val();
-                    $scope.player= mainPlayerInfo;
-
-
-
-
-                });
-
-
-
-
-            } // User Authenticated
-        }); // on Auth
-    }]) // Controller#
-
-
-(function () {
-
+"use strict";
     angular.module("poolBear.auth", []).factory('Authentication',
 
                      ['$rootScope', '$firebaseAuth', '$firebaseObject', '$location', 'FIREBASE_URL',
@@ -1096,7 +1035,6 @@ angular.module('poolBear.settings', [
 
             }])
 
-}());
 (function () {
     'use strict';
 
@@ -4776,6 +4714,67 @@ angular.module('mm.foundation.typeahead', ['mm.foundation.position', 'mm.foundat
             };
         });
 }());
+'use strict';
+angular.module('poolBear.settings', [
+    
+   
+])
+.config(function ($stateProvider) {
+
+    $stateProvider
+      .state('app.settings', {
+           
+          
+          url: '/settings',
+          data: { title: 'Settings' },
+          views: {
+              'main': {
+                  controller: 'SettingsCtrl',
+                  templateUrl: 'components/settings/settings.html'
+
+
+              }
+          }
+
+
+      })
+    
+}).controller('SettingsCtrl',
+
+           ['$scope', '$rootScope', 'Authentication', '$state','$location', '$firebaseArray','FIREBASE_URL', '$firebaseObject', '$firebaseAuth',
+
+        function($scope,$rootScope, Authentication, $state, $location,$firebaseArray , FIREBASE_URL, $firebaseObject, $firebaseAuth) {
+
+        var ref = new Firebase(FIREBASE_URL);
+        var auth = $firebaseAuth(ref);
+
+
+        auth.$onAuth(function (authUser) {
+            if (authUser) {
+
+                var mainPlayerInfo;
+                //Variable
+
+                var PlayerRef = new Firebase(FIREBASE_URL + 'users/' +  $rootScope.currentUser.$id);
+                PlayerRef.on('value', function(snap){
+                    console.log("snap" , snap.val());
+
+                    mainPlayerInfo = snap.val();
+                    $scope.player= mainPlayerInfo;
+
+
+
+
+                });
+
+
+
+
+            } // User Authenticated
+        }); // on Auth
+    }]) // Controller#
+
+
 angular.module("themeConfig", [])
 .constant("pool", "_poolBear")
 .constant("playerFilter", [{"filterId":1,"filterName":"PLATFORM"},{"filterId":2,"filterName":"PLAYED"}])
@@ -6301,218 +6300,6 @@ angular.module( 'poolBear.uploadFileService', [])
 
 
 (function () {
-    "use strict";
-
-    angular.module('poolBear.login').controller('RegistrationController',
-
-
-                    ['$scope', '$rootScope', 'Authentication', '$state', '$location', '$firebaseArray', 'FIREBASE_URL', '$firebaseObject', '$firebaseAuth', 'fileUpload', 'Upload', '$timeout', '$window',
-            function ($scope,   $rootScope, Authentication, $state, $location, $firebaseArray, FIREBASE_URL, $firebaseObject, $firebaseAuth, fileUpload, Upload, $timeout, $window) {
-
-                console.log("RegistrationController-CTRL-FIRED");
-
-                var auth = firebase.auth();
-                var database = firebase.database();
-
-
-                // CREATES A CURRENT  USER OBJECT  AND PLACE INTO ROOT SCOPE
-               auth.onAuthStateChanged(function (authUser) {
-                    if (authUser) {
-                        console.log("authUser", authUser.uid);;
-                        $scope.bearShow = true;
-
-                        var  userId = firebase.auth().currentUser.uid;
-
-                        var userData = database.ref( 'users/' + userId );
-                        userData.once('value', function(snapshot) {
-                            var user = (snapshot.val() && snapshot.val()) || 'Anonymous';
-                            $rootScope.currentUser = user;
-                        });
-
-                    } else {
-                        $rootScope.currentUser = '';
-                    }
-                });
-
-
-                // GET AUTH REFERENCE
-
-                auth.onAuthStateChanged(function (authUser) {
-                    if (authUser) {
-                        var  userId = firebase.auth().currentUser.uid;
-
-
-                        var bearAddRef = database.ref( 'users/' + userId );
-                        var UserRef = new Firebase(FIREBASE_URL + 'bears/poolbear/users/' + userId);
-                        var registerBearRef = new Firebase(FIREBASE_URL + 'bears/poolbear/users/' + userId + '/bearList');
-
-                        // var test = $firebaseObject(bearAddRef);
-
-                        $scope.currentState = $state.current.name;
-                        $scope.showPageHero = $location.path() === '/';
-                        $scope.profileUser = UserRef.userimage;
-                        $scope.registeredBearsList = $firebaseObject(registerBearRef);
-                        console.log("$scope.registeredBearsList" , $scope.registeredBearsList);
-
-
-
-                        //CHECK IT IMAGE IS PRESENT
-
-
-                        // $firebaseObject(bearAddRef).$loaded(function (player) {
-                        //
-                        //
-                        //     if (player.userimage === "noImages") {
-                        //         $scope.imageUploadShow = true;
-                        //         $scope.bearShow = false;
-                        //     } else {
-                        //         $scope.imageUploadShow = false;
-                        //         $scope.bearShow = true;
-                        //     }
-                        //
-                        //
-                        // });
-
-
-                        $scope.detail = false;
-                        $scope.hideDetail = function () {
-                            $scope.detail = !$scope.detail;
-
-                        }
-
-
-                        $scope.checked = false;
-                        $scope.bearArray = [];
-
-
-                        $scope.bearsList = [
-                            {id: 1, name: "poolBear"},
-                            {id: 2, name: "runningBear"},
-                            {id: 3, name: "footballBear"},
-                            {id: 4, name: "squashBear"}
-                        ];
-
-
-                        Array.prototype.remove = function () {
-
-                            var what, a = arguments, L = a.length, ax;
-                            while (L && this.length) {
-                                what = a[--L];
-                                while ((ax = this.indexOf(what)) !== -1) {
-                                    this.splice(ax, 1);
-                                }
-                            }
-                            return this;
-                        };
-
-
-                        //CHECK IN BEAR SELECT
-                        $scope.isChecked = function (bear, checked) {
-                            if (checked === true) {
-                                $scope.bearArray.push(bear);
-                            } else {
-                                $scope.bearArray.remove(bear);
-                            }
-                        }
-
-                        //BEAR LIST
-                        // var bearListObject = $firebaseObject(bearAddRef);
-                        // $scope.bearLists = bearListObject;
-
-                    } // User Authenticated
-                }); // on Auth
-
-
-
-
-                //ADD BEARS
-                $scope.addbears = function (theme) {
-                   //  console.log("ADD-BEARS FIRED " , theme);
-                   //
-                   //
-                   //  theme.forEach(function(item) {
-                   //
-                   //
-                   // item = item.toLowerCase();
-                   //      console.log("item",item);
-                   //
-                   //
-                   //
-                   //  let bearAddRef = new Firebase(FIREBASE_URL + 'users/' + $rootScope.currentUser.$id);
-                   //  let poolBearUserRef = new Firebase(FIREBASE_URL + 'bears/' + item + '/users');
-                   //  let newBearArray = [];
-                   //
-                   //
-                   //      $scope.bearArray.forEach(function (item) {
-                   //          newBearArray.push(item);
-                   //      });
-                   //      $scope.registeredBearsList.forEach(function (item) {
-                   //          newBearArray.push(item);
-                   //      })
-                   //
-                   //
-                   //      var uniqList = _.uniq(newBearArray);
-                   //      console.log("uniqList " , uniqList );
-                   //
-                   //      poolBearUserRef.child($rootScope.currentUser.$id).update({
-                   //          bearList: uniqList
-                   //      }); //user info
-                   //
-                   //  // ADD BEAR REF START
-                   //  bearAddRef.on('value', function (snap) {
-                   //      var mainPlayerInfo = snap.val();
-                   //      mainPlayerInfo.wins = 0;
-                   //      mainPlayerInfo.lost = 0;
-                   //      mainPlayerInfo.points = 0;
-                   //      mainPlayerInfo.cheats = 0;
-                   //      mainPlayerInfo.declined = 0;
-                   //      mainPlayerInfo.active = true;
-                   //      mainPlayerInfo.bearList= uniqList;
-                   //      mainPlayerInfo.elo= 5;
-                   //
-                   //      poolBearUserRef.child($rootScope.currentUser.$id).once("value", snapshot => {
-                   //
-                   //          const checkbear = snapshot.val();
-                   //          console.log("checkbear" , checkbear );
-                   //
-                   //          if(checkbear === null || checkbear === undefined ){
-                   //              console.log("user exists!");
-                   //          }else{
-                   //              console.log("bear created!");
-                   //              poolBearUserRef.child($rootScope.currentUser.$id).set(mainPlayerInfo);
-                   //          }
-                   //      });
-                   //  });
-                   //
-                   //
-                   //
-                   //  });
-                }
-                // ADD BEAR REF END //
-
-
-
-                // Just is required for the form
-                $scope.login = function () {
-                    console.log("LOGIN In Registrator FIRED ?");
-                    Authentication.login($scope.user);
-
-                }; //login
-
-                $scope.logout = function () {
-                    Authentication.logout();
-                }; //logouti
-
-                $scope.register = function () {
-                    Authentication.register($scope.user);
-                }; // register
-
-
-            }]) // Controller#
-
-
-}());
-(function () {
     'use strict';
 
     angular.module('poolBear.player')
@@ -6927,34 +6714,6 @@ angular.module( 'poolBear.uploadFileService', [])
 }());
 
 
-(function () {
-
-  angular.module('poolBear')
-  .directive('tbLoginForm', function() {
-    console.log("TB-LOGIN-FORM-DIR FIRED" );
-    return {
-      restrict: 'E',
-      templateUrl:'components/login/directives/templates/login.html'
-    };
-  })
-
-}());
-
-(function () {
-    'use strict';
-
-
-    angular.module( 'poolBear')
-.directive('ifLogo', function() {
-  return {
-      restrict: 'E',
-      templateUrl:'components/login/directives/templates/logo.html'
-  };
-})
-
-}());
-
-
 'use strict';
 angular.module('poolBear.result')
 .config(function ($stateProvider) {
@@ -6976,6 +6735,33 @@ angular.module('poolBear.result')
       })
     
 }).controller('challengeCtrl', ['$scope', function challengeCtrl($scope) {
+    
+    
+    
+}]);
+
+
+'use strict';
+angular.module('poolBear.result')
+.config(function ($stateProvider) {
+
+    $stateProvider
+      .state('app.decline', {
+          url: '/player/decline',
+          data: { title: 'decline' },
+          views: {
+              'main': {
+                  controller: 'declineCtrl',
+                  templateUrl: 'components/result/decline/decline-list.html'
+
+
+              }
+          }
+
+
+      })
+    
+}).controller('lostCtrl', ['$scope', function lostCtrl($scope) {
     
     
     
@@ -7015,33 +6801,6 @@ angular.module('poolBear.result')
 }());
 
 
-
-
-'use strict';
-angular.module('poolBear.result')
-.config(function ($stateProvider) {
-
-    $stateProvider
-      .state('app.decline', {
-          url: '/player/decline',
-          data: { title: 'decline' },
-          views: {
-              'main': {
-                  controller: 'declineCtrl',
-                  templateUrl: 'components/result/decline/decline-list.html'
-
-
-              }
-          }
-
-
-      })
-    
-}).controller('lostCtrl', ['$scope', function lostCtrl($scope) {
-    
-    
-    
-}]);
 
 
 'use strict';
@@ -7096,6 +6855,246 @@ angular.module('poolBear.result')
     
     
 }]);
+
+
+(function () {
+    "use strict";
+
+    angular.module('poolBear.login').controller('RegistrationController',
+
+
+                    ['$scope', '$rootScope', 'Authentication', '$state', '$location', '$firebaseArray', 'FIREBASE_URL', '$firebaseObject', '$firebaseAuth', 'fileUpload', 'Upload', '$timeout', '$window',
+            function ($scope,   $rootScope, Authentication, $state, $location, $firebaseArray, FIREBASE_URL, $firebaseObject, $firebaseAuth, fileUpload, Upload, $timeout, $window) {
+
+                console.log("RegistrationController-CTRL-FIRED");
+
+                var auth = firebase.auth();
+                var database = firebase.database();
+
+
+                // CREATES A CURRENT  USER OBJECT  AND PLACE INTO ROOT SCOPE
+               auth.onAuthStateChanged(function (authUser) {
+                    if (authUser) {
+                        console.log("authUser", authUser.uid);;
+                        $scope.bearShow = true;
+
+                        var  userId = firebase.auth().currentUser.uid;
+
+                        var userData = database.ref( 'users/' + userId );
+                        userData.once('value', function(snapshot) {
+                            var user = (snapshot.val() && snapshot.val()) || 'Anonymous';
+                            $rootScope.currentUser = user;
+                        });
+
+                    } else {
+                        $rootScope.currentUser = '';
+                    }
+                });
+
+
+                // GET AUTH REFERENCE
+
+                auth.onAuthStateChanged(function (authUser) {
+                    if (authUser) {
+                        var  userId = firebase.auth().currentUser.uid;
+
+
+                        var bearAddRef = database.ref( 'users/' + userId );
+                        var UserRef = new Firebase(FIREBASE_URL + 'bears/poolbear/users/' + userId);
+                        var registerBearRef = new Firebase(FIREBASE_URL + 'bears/poolbear/users/' + userId + '/bearList');
+
+                        // var test = $firebaseObject(bearAddRef);
+
+                        $scope.currentState = $state.current.name;
+                        $scope.showPageHero = $location.path() === '/';
+                        $scope.profileUser = UserRef.userimage;
+                        $scope.registeredBearsList = $firebaseObject(registerBearRef);
+                        console.log("$scope.registeredBearsList" , $scope.registeredBearsList);
+
+
+
+                        //CHECK IT IMAGE IS PRESENT
+
+
+                        // $firebaseObject(bearAddRef).$loaded(function (player) {
+                        //
+                        //
+                        //     if (player.userimage === "noImages") {
+                        //         $scope.imageUploadShow = true;
+                        //         $scope.bearShow = false;
+                        //     } else {
+                        //         $scope.imageUploadShow = false;
+                        //         $scope.bearShow = true;
+                        //     }
+                        //
+                        //
+                        // });
+
+
+                        $scope.detail = false;
+                        $scope.hideDetail = function () {
+                            $scope.detail = !$scope.detail;
+
+                        }
+
+
+                        $scope.checked = false;
+                        $scope.bearArray = [];
+
+
+                        $scope.bearsList = [
+                            {id: 1, name: "poolBear"},
+                            {id: 2, name: "runningBear"},
+                            {id: 3, name: "footballBear"},
+                            {id: 4, name: "squashBear"}
+                        ];
+
+
+                        Array.prototype.remove = function () {
+
+                            var what, a = arguments, L = a.length, ax;
+                            while (L && this.length) {
+                                what = a[--L];
+                                while ((ax = this.indexOf(what)) !== -1) {
+                                    this.splice(ax, 1);
+                                }
+                            }
+                            return this;
+                        };
+
+
+                        //CHECK IN BEAR SELECT
+                        $scope.isChecked = function (bear, checked) {
+                            if (checked === true) {
+                                $scope.bearArray.push(bear);
+                            } else {
+                                $scope.bearArray.remove(bear);
+                            }
+                        }
+
+                        //BEAR LIST
+                        // var bearListObject = $firebaseObject(bearAddRef);
+                        // $scope.bearLists = bearListObject;
+
+                    } // User Authenticated
+                }); // on Auth
+
+
+
+
+                //ADD BEARS
+                $scope.addbears = function (theme) {
+                   //  console.log("ADD-BEARS FIRED " , theme);
+                   //
+                   //
+                   //  theme.forEach(function(item) {
+                   //
+                   //
+                   // item = item.toLowerCase();
+                   //      console.log("item",item);
+                   //
+                   //
+                   //
+                   //  let bearAddRef = new Firebase(FIREBASE_URL + 'users/' + $rootScope.currentUser.$id);
+                   //  let poolBearUserRef = new Firebase(FIREBASE_URL + 'bears/' + item + '/users');
+                   //  let newBearArray = [];
+                   //
+                   //
+                   //      $scope.bearArray.forEach(function (item) {
+                   //          newBearArray.push(item);
+                   //      });
+                   //      $scope.registeredBearsList.forEach(function (item) {
+                   //          newBearArray.push(item);
+                   //      })
+                   //
+                   //
+                   //      var uniqList = _.uniq(newBearArray);
+                   //      console.log("uniqList " , uniqList );
+                   //
+                   //      poolBearUserRef.child($rootScope.currentUser.$id).update({
+                   //          bearList: uniqList
+                   //      }); //user info
+                   //
+                   //  // ADD BEAR REF START
+                   //  bearAddRef.on('value', function (snap) {
+                   //      var mainPlayerInfo = snap.val();
+                   //      mainPlayerInfo.wins = 0;
+                   //      mainPlayerInfo.lost = 0;
+                   //      mainPlayerInfo.points = 0;
+                   //      mainPlayerInfo.cheats = 0;
+                   //      mainPlayerInfo.declined = 0;
+                   //      mainPlayerInfo.active = true;
+                   //      mainPlayerInfo.bearList= uniqList;
+                   //      mainPlayerInfo.elo= 5;
+                   //
+                   //      poolBearUserRef.child($rootScope.currentUser.$id).once("value", snapshot => {
+                   //
+                   //          const checkbear = snapshot.val();
+                   //          console.log("checkbear" , checkbear );
+                   //
+                   //          if(checkbear === null || checkbear === undefined ){
+                   //              console.log("user exists!");
+                   //          }else{
+                   //              console.log("bear created!");
+                   //              poolBearUserRef.child($rootScope.currentUser.$id).set(mainPlayerInfo);
+                   //          }
+                   //      });
+                   //  });
+                   //
+                   //
+                   //
+                   //  });
+                }
+                // ADD BEAR REF END //
+
+
+
+                // Just is required for the form
+                $scope.login = function () {
+                    console.log("LOGIN In Registrator FIRED ?");
+                    Authentication.login($scope.user);
+
+                }; //login
+
+                $scope.logout = function () {
+                    Authentication.logout();
+                }; //logouti
+
+                $scope.register = function () {
+                    Authentication.register($scope.user);
+                }; // register
+
+
+            }]) // Controller#
+
+
+}());
+(function () {
+
+  angular.module('poolBear')
+  .directive('tbLoginForm', function() {
+    console.log("TB-LOGIN-FORM-DIR FIRED" );
+    return {
+      restrict: 'E',
+      templateUrl:'components/login/directives/templates/login.html'
+    };
+  })
+
+}());
+
+(function () {
+    'use strict';
+
+
+    angular.module( 'poolBear')
+.directive('ifLogo', function() {
+  return {
+      restrict: 'E',
+      templateUrl:'components/login/directives/templates/logo.html'
+  };
+})
+
+}());
 
 
 (function(){

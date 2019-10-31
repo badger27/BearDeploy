@@ -1,5 +1,5 @@
-(function () {
 
+"use strict";
     angular.module("poolBear.auth", []).factory('Authentication',
 
                      ['$rootScope', '$firebaseAuth', '$firebaseObject', '$location', 'FIREBASE_URL',
@@ -79,5 +79,3 @@
                 }
 
             }])
-
-}());
