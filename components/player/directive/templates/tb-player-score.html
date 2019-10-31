@@ -1,0 +1,32 @@
+<span>
+                        <a ng-hide="player.regUser === UserId" ui-sref="app.playersetscore({ id:player.regUser})">
+                            <div ng-class="theme">
+                            <div class="player-score left">
+
+                               <div ng-repeat="i in results | filter:player.regUser ">
+                                   <div class="row">
+                                           <div style="margin-top:15%;">
+                                           <p style="font-size: 11px; font-weight:bold; " class="number">{{i.playerWins}}/</p><p
+                                                   class="number">{{i.UserWins}}</p>
+                                           </div>
+                                   </div>
+                                   <div style="margin-top:25%;" class="row"><i class="fi-graph-bar"></i></div>
+                               </div>
+
+                                <div style="margin-top:25%;">
+                                    <p placeholder="0" class="number">0/0<br><i class="fi-graph-bar"></i></p>
+                                </div>
+                             </div>
+                                </div>
+                        </a>
+
+
+                       <a ng-hide="player.regUser !== UserId">
+                            <div class="player-score left" style="background:#de0c53;">
+                                  <div>
+                                      <p placeholder="0" class="number"><p style="color:white; margin-top:25%;">{{$index + 1}}th</p><br><i
+                                          class="fi-graph-bar"></i></p>
+                                </div>
+                             </div>
+                        </a>
+</span>
