@@ -1,5 +1,4 @@
-(function () {
-
+"use strict";
   angular.module('poolBear')
   .directive('tbLoginForm', function() {
     console.log("TB-LOGIN-FORM-DIR FIRED" );
@@ -9,4 +8,3 @@
     };
   })
 
-}());

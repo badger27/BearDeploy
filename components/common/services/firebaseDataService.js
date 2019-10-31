@@ -1,5 +1,4 @@
 // FIREBASE DATA SERVICE START
-(function () {
     'use strict';
     angular.module('poolBear.player')
         .factory('firebaseDataService', ['$rootScope', '$firebaseAuth', '$firebaseArray', '$firebaseObject', 'FIREBASE_URL',
@@ -110,5 +109,4 @@
 
             }
         ]);
-}());
 

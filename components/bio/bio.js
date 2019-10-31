@@ -1,4 +1,5 @@
-"use strict";
+(function () {
+    "use strict";
 angular.module('poolBear.bio', [])
     .config(function ($stateProvider) {
 
@@ -29,3 +30,5 @@ angular.module('poolBear.bio', [])
                 console.log("BIO FIRED");
 
             }])
+
+}());

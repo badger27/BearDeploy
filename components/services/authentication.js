@@ -8,7 +8,6 @@
                 var auth = firebase.auth();
 
 
-
                 return {
 
                     //LOGIN START
@@ -74,8 +73,5 @@
                             $rootScope.message = error.message;
                         }); // CREATE USERS
                     } // REGISTER END
-
-
                 }
-
             }])
