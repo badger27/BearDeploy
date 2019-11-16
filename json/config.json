@@ -1,0 +1,5 @@
+{
+  "playerFilter": [{"filterId": 1, "filterName": "PLATFORM"}, {"filterId": 2, "filterName": "PLAYED"}],
+  "sortFilter": [{"sortId": 1, "filterName": "RANK"},{"filterId": 2, "filterName": "WINS"}, {"filterId": 2, "filterName": "LOST"}];
+}
+

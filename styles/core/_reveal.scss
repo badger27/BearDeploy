@@ -1,0 +1,112 @@
+
+//.modallist{
+// padding-top:20px;
+// width:80%;
+//
+//}
+
+.reveal-modal {
+  min-height: 300px;
+  border-radius: 3px;
+  display: none;
+  position: absolute;
+  top: 0;
+  visibility: hidden;
+  width: 100%;
+  z-index: 1005;
+  left: 0%;
+  background-color: $brand-background-color;
+  padding: 3.2rem;
+  border: solid 1px #666666;
+  text-align: left;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  margin-top: 100px;
+
+  span{
+    margin-left:10px;
+  }
+  span:hover{
+    color:$brand-main-color;
+  }
+
+  li{
+    padding: 10px;
+  }
+
+  li:hover{
+
+    color:$brand-main-color;
+  }
+
+  p{
+    font-size: $paragraph-font-size ;
+  }
+
+  a{
+    font-size: 28px;
+  }
+
+}
+
+.reveal-modal modallist  i {
+  margin-top: 17px;
+  margin-bottom: 10px;
+}
+
+.reveal-modal.ng-hide-add,
+.reveal-modal.ng-hide-remove{
+  display: block !important;
+}
+
+.reveal-modal.ng-hide{
+  -webkit-transform: scale(0.9);
+  opacity: 0;
+}
+
+
+.ng-modal {
+  transition: 0.2s ease-in-out opacity;
+}
+
+.ng-modal .reveal-modal {
+  display: block;
+  visibility: visible;
+}
+
+.ng-modal .reveal-modal-bg {
+  display: block;
+}
+
+.ng-modal.ng-hide-add,
+.ng-modal.ng-hide-remove{
+  display: block !important;
+}
+
+.ng-modal.ng-hide{
+  opacity: 0;
+}
+
+.reveal-modal{
+  transition: 0.2s ease-in-out all;
+  transition-delay: 0.2s;
+  -webkit-transform: scale(1);
+  opacity: 1;
+}
+
+
+.demo .button{
+  margin: 60px auto 0;
+}
+
+.demo .button, .demo .button:focus{
+  outline: none;
+}
+
+
+.reveal-modal ul li  h3 {
+  display: block;
+  width: 100%;
+  font-size: 28px;
+
+
+}

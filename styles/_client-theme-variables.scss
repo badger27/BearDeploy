@@ -1,0 +1,81 @@
+
+//pool
+$brand-main-color: #de0c53;
+$poolbear:#1e394e;
+
+//football
+$brand-main-color-football:#875C74;
+$football:#262626;
+
+
+$activity-main-color: #e91e63;
+
+
+
+
+$brand-forth-color: #e8e8e8;
+$brand-secondary-color: #de0c53; //red
+$brand-third-color: black;   //black
+$brand-fifth-color: #ffff;  //white
+$brand-odd: #dedede;
+$brand-even:#f2f2f2;
+
+$alertsend:red;
+$alertfrom: #69626D;
+$alertconfirm:black;
+
+
+//fonts
+
+$main-font-color:black;
+$white-font-color:white;
+
+$paragraph-font-size: .9rem;
+
+//Number
+$number-sm: 0.7rem;
+$number-md: rem-calc(1);
+$number-lg: rem-calc(23);
+
+
+
+//Activaties
+$bear:#orange;
+
+
+$runningbear:#863d8d;
+$golfbear:#863d8d;
+$codebear:#863d8d;
+
+//Background
+$background-color-outer:grey;
+$brand-background-color: #f2f2f2;
+$brand-background-side-color: #c5c4c4;
+
+/*
+
+$brand-focus-color :#c43d30;
+$brand-hover-color : #c43d30;
+$brand-active-color : #c43d30;
+$brand-fonts-family-main: $roboto;
+$brand-fonts-family-secondary: $font-family-sans-serif;
+$brand-logo: url( '../images/cl-et/icons/logo.svg' ) no-repeat;
+*/
+
+
+
+//fonts
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans:400italic,700italic,400,700);
+@import url(https://fonts.googleapis.com/css?family=Baumans);
+@import url(https://fonts.googleapis.com/css?family=Rubik);
+@import url(https://fonts.googleapis.com/css?family=Chivo:400,400i,700,700i,900);
+@import url(https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i,900,900i);
+@import url('https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700');
+
+
+$Quicksand :'Quicksand', sans-serif;
+$Lato :'Lato', sans-serif;
+$Chivo :'Chivo', sans-serif;
+$Rubik: 'Rubik', sans-serif;
+$roboto-slab: 'Roboto Slab', serif;
+$roboto: 'Roboto', serif;

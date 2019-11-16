@@ -1,0 +1,620 @@
+
+//Main page structure
+
+body, html
+{
+  width:100%;
+  height: 100%;
+  font-size:  $paragraph-font-size;
+  color: $main-font-color;
+  background-color:$brand-background-color;
+  //background-image: linear-gradient(#8b9da9, #fff6e4);
+  padding:0px;
+  margin:0px;
+  font-family: $Quicksand;
+}
+
+
+.nav-section{
+  text-align: center;
+}
+
+.custom-dropdown-button{
+  width: 100%;
+}
+
+@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
+.search { position: relative; }
+.search input { text-indent: 30px;}
+.search .fa-search {
+  position: absolute;
+  top: 14px;
+  right: 27px;
+  font-size: 15px;
+}
+
+
+.fa-search:before {
+  content: "\f002";
+  opacity: 0.5;
+  color: $brand-main-color;
+  font-size: 20px;
+}
+
+
+h1, h2, h3, h4, h5, h6
+{
+  color:$main-font-color;
+  font-family:  $Quicksand ;
+  -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
+
+}
+
+h1{  font-size:  $h1-font-size;  }
+h2{  font-size:  $h2-font-size;  }
+h6 {  font-size: .9rem;  }
+
+ul, ol, dl {
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.1;
+  list-style-position: outside;
+  margin-bottom: 0px;
+  list-style-type: none;
+}
+
+p {
+  font-family:  $Quicksand;
+  font-size:  $paragraph-font-size;
+  font-weight: normal;
+  line-height: 1.6;
+  margin-bottom: 0rem;
+  text-rendering: optimizeLegibility;
+}
+
+em, i {
+
+  font-size: 18px;
+}
+
+
+
+
+
+.wrapper {
+    text-align: center;
+}
+
+
+
+@media only screen{
+.column, .columns {
+    position: relative;
+    padding-left: 0.0rem;
+    padding-right: 0.0rem;
+    float: left;
+ }
+}
+
+.full-height {
+    min-height: 100vh;
+}
+
+
+.grey-section {
+    padding: 20px;
+    width: 100%;
+    background-color: #e3e3e3;
+  }
+
+
+
+
+
+.item {
+
+    h1  {
+        color:white;
+         width: 18rem;
+        display: block;
+        margin: 1rem auto;
+        text-align: center;
+
+    }
+    p{
+        color:white;
+         width: 12rem;
+        display: block;
+        margin: .1rem auto;
+        text-align: center;
+
+    }
+    h4 {
+    color:white;
+     width: 12rem;
+    display: block;
+    margin: .5rem auto;
+    text-align: center;
+}
+  ul {
+    color:white;
+     width: 12rem;
+    display: block;
+    margin: .1rem auto;
+}
+
+}
+
+
+a {
+    color: white;
+    line-height: .5;
+    text-decoration: none;
+    font-size: 10px;
+  -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
+}
+
+
+
+
+
+.inline-list {
+    list-style: none;
+    margin-top: 0;
+    margin-bottom: 1.0625rem;
+    margin-left: 0rem;
+    margin-right: 0;
+    overflow: hidden;
+    padding: 0;
+}
+
+
+
+
+
+
+.container {
+    padding: 0rem 2rem;
+    margin: 0rem 0;
+}
+
+.title{
+        margin: 0 auto;
+
+    h1{
+        text-align:center;
+        color:white;
+     }
+
+}
+
+
+.search input:focus {
+    color: #797979;
+    background-color:#121116;
+    background-position: right;
+  background-image: url("");
+}
+
+.challenge {
+   width:25px;
+   height:25px;
+   background-size: 25px 25px;
+/*   background-color: red;*/
+}
+
+.challenge {
+
+   width:25px;
+   height:25px;
+   background-size: 25px 25px;
+/*   background-color: red;*/
+}
+
+.challenge:active {
+   width:25px;
+   height:25px;
+   background-size: 25px 25px;
+/*   background-color: red;*/
+}
+
+fieldset {
+    border: none;
+    margin: 1.125rem 0;
+    padding: 1.25rem;
+}
+
+//Nav Animation
+.ng-enter
+      {
+          -webkit-transition: 1s;
+          transition: 1s;
+          opacity:0;
+      }
+      .ng-enter-active
+      {
+          opacity:1;
+      }
+      .ng-leave
+      {
+          -webkit-transition: 0s;
+          transition: 0s;
+      }
+      .ng-leave-active
+      {
+          opacity:0;
+      }
+
+
+    //Shadows
+
+/*    .shadow {
+  margin: 40px;
+  background-color: rgb(68,68,68);  Needed for IEs
+
+  -moz-box-shadow: 5px 5px 5px rgba(68,68,68,0.6);
+  -webkit-box-shadow: 5px 5px 5px rgba(68,68,68,0.6);
+  box-shadow: 5px 5px 5px rgba(68,68,68,0.6);
+
+  filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30)";
+  zoom: 1;
+}
+.shadow .content {
+  position: relative;  This protects the inner element from being blurred
+  padding: 100px;
+  background-color: #DDD;
+}*/
+
+.wrapper{
+/*     background: url(/images/background/background-10.jpg) no-repeat center center fixed; */
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  margin-bottom:40px;
+  min-height: 300px;
+
+}
+
+/*html {
+  background: url(images/background/background-10.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}*/
+
+
+
+
+
+.secondary-tabs {
+  .tabs {
+    i {
+      font-size: 1.5rem;
+      margin-right: 1rem;
+    }
+    text-align: center;
+    li {
+      width: 25%;
+      &:hover i {
+        font-size:2rem;
+      }
+    }
+    .tab-title > a {
+      background-color:#ffffff;
+      outline:none;
+      font-size: 1.5rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+      padding-bottom: 0.5rem;
+      padding-top: 0.5rem;
+      color: $activity-main-color;
+    }
+  }
+  .tabs-content {
+    h3 {
+     margin-left: 2.7rem;
+    }
+    h5 {
+      color: #e74c3c;
+      margin-left: 2.7rem;
+    }
+    p {
+      margin-bottom: 0.2rem;
+    }
+    .switch {
+      margin-bottom: 1rem;
+    }
+    border: 1px solid #999;
+    border-top: none;
+  }
+}
+
+// progress styles
+
+.progress {
+    margin: 16px 0px 2rem 25px;
+    padding: 0;
+    width: 90%;
+    height: 15px;
+    overflow: hidden;
+    background: #212121;
+    border-radius: 6px;
+}
+
+.meter {
+	position:relative;
+  float:left;
+  min-width:1%;
+  height:100%;
+}
+
+.percent {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  margin:0;
+  font-family:tahoma,arial,helvetica;
+  font-size:12px;
+  color:white;
+}
+
+.meter.blue {
+  background:cornflowerblue;
+}
+
+.meter.red {
+  background: #b75356;
+}
+
+.meter.orange {
+  background: #e67e22;
+}
+
+.meter.green {
+  background: #2ecc71;
+}
+
+.meter.purple {
+  background: #9b59b6;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+svg {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+
+
+.register {
+
+  text-align: right;
+  color: $brand-secondary-color;
+
+}
+
+
+.score-alert-box{
+  text-align: center;
+  margin-top: 15%;
+}
+
+
+
+
+.alert-box {
+
+  h3 {
+    color: $brand-fifth-color;
+  }
+}
+
+.menu-image {
+  display: block;
+  background-size: contain;
+  position: relative;
+  cursor: pointer;
+  background: none;
+}
+
+.rating > span:hover:before {
+  content: "\2605";
+  position: absolute;
+  font-size: 2px;
+}
+
+
+.img-circle {
+  width:50px;
+  border-radius: 50%;
+  padding: 4px;
+}
+
+input[type="file"] {
+  width: 100%;
+  color: black;
+}
+
+
+#outer_2_{
+  background: red;
+}
+
+
+.block{
+  display: block;
+}
+
+
+
+em, i {
+  font-size: 30px;
+}
+
+
+.img-valign {
+  vertical-align: middle;
+  margin-bottom: 0.75em;
+}
+
+.text1 {
+  font-size: 44px;
+}
+
+.text2 {
+  font-size: 24px;
+}
+
+
+
+
+
+  .angular-rating-icons {
+    text-align: left;
+    display: inline-block;
+    padding: 0;
+    list-style: none;
+  }
+
+  .angular-rating-icons > li {
+    display: inline-block;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .angular-rating-icons-decimal > li {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .angular-rating-icons-decimal > li > i {
+    position: absolute;
+  }
+
+
+
+.noSelect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+//DASHBOARD
+
+@mixin clipped-circle-graph-circle($size) {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  left: calc(50% - #{$size/2});
+  top: calc(50% - #{$size/2});
+  width: $size;
+  height: $size;
+}
+
+$clipped-circle-graph-size: rem-calc(180);
+$clipped-circle-graph-percent-number-size: rem-calc(24);
+$clipped-circle-graph-percent-unit-size: rem-calc(16);
+$clipped-circle-graph-empty-color: grey;
+$clipped-circle-background-color: LightGray ;
+$clipped-circle-graph-fill-color: $brand-main-color;
+$clipped-circle-clip-size: rem-calc(80);
+
+.clipped-circle-graph {
+  width: $clipped-circle-graph-size;
+  height: $clipped-circle-graph-size;
+  border-radius: 50%;
+  background-color: $clipped-circle-graph-empty-color;
+  position: relative;
+
+  &.gt-50 {
+    background-color: $clipped-circle-graph-fill-color;
+  }
+  &:after {
+    content: '';
+
+    bottom: 19px;
+    background: $clipped-circle-background-color;
+    height: $clipped-circle-clip-size;
+    width: $clipped-circle-clip-size;
+    z-index: 3;
+    transform: rotate(45deg) translate3d(0,0,0);
+    transform-origin: -30px 15px;
+  }
+}
+
+.clipped-circle-graph-progress {
+  @include clipped-circle-graph-circle($clipped-circle-graph-size);
+  clip: rect(0, $clipped-circle-graph-size, $clipped-circle-graph-size, #{$clipped-circle-graph-size/2});
+  transform: rotate(-180deg) perspective(0);
+
+  .clipped-circle-graph-progress-fill {
+    @include clipped-circle-graph-circle($clipped-circle-graph-size);
+    clip: rect(0, #{$clipped-circle-graph-size/2}, $clipped-circle-graph-size, 0);
+    background: $clipped-circle-graph-fill-color;
+    transform: rotate(60deg);
+  }
+
+  .gt-50 & {
+    clip: rect(0, #{$clipped-circle-graph-size/2}, $clipped-circle-graph-size, 0);
+
+    .clipped-circle-graph-progress-fill {
+      clip: rect(0, $clipped-circle-graph-size, $clipped-circle-graph-size, #{$clipped-circle-graph-size/2});
+      background: $clipped-circle-graph-empty-color;
+    }
+  }
+}
+.clipped-circle-graph-percents {
+  @include clipped-circle-graph-circle(#{$clipped-circle-graph-size/1.45});
+  background: $clipped-circle-background-color;
+  text-align: center;
+  display: table;
+  z-index: 4;
+
+  .clipped-circle-graph-percents-number {
+    display: block;
+    font-size: $clipped-circle-graph-percent-number-size;
+    font-weight: bold;
+    color: $clipped-circle-graph-fill-color;
+  }
+
+  .clipped-circle-graph-percents-units {
+    display: block;
+    font-size: $clipped-circle-graph-percent-unit-size;
+    font-weight: bold;
+  }
+}
+.clipped-circle-graph-percents-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+  line-height: 0;
+
+  span {
+    line-height: 1;
+  }
+}
+
+
+
+.switch input:checked + label {
+  background: $brand-main-color;
+}
+

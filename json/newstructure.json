@@ -1,0 +1,135 @@
+{
+  "users" : {
+    "350b61d4-6498-4261-96c7-19773c788e2a" : {
+      
+      "date" : 1453254888821,
+      "regUser" : "350b61d4-6498-4261-96c7-19773c788e2a",
+      "email" : "robbrennan@gmail.com",
+      "firstname" : "Rob",
+      "lastname" : "Brennan",
+      "bears" : {
+        "golfbear" : {
+               "bearname":"poolgolf", 
+               "golflbearicon" : "http://gatherngo.tonicdigitalmedia.com/images/svg/golfbear.png"
+        },
+        "poolbear" : {
+                "bearname":"poolbear", 
+                "poolbearicon" : "http://gatherngo.tonicdigitalmedia.com/images/svg/poolbear.png",
+                "lost" : 52,
+                "losttotals" : 44,
+                "played" : "",
+                "points" : 100,
+                 "profile_image" : "http://gatherngo.tonicdigitalmedia.com/images/user/RobBrennan.png",
+                 "rank" : 4,
+                 "rated" : 12,                
+                 "results" : "",
+                 "tag" : "Rake Em Bitch",
+                 "wins" : 48,
+                 "winstotal" : 44
+        },
+        "squshbear" : {
+          "bearname":"poolsquash", 
+          "squashbearicon" : "http://gatherngo.tonicdigitalmedia.com/images/svg/squashbear.png"
+        }
+      }
+
+    },
+    
+
+
+
+
+     "ad3b2a78-7831-4537-a2eb-365c99fb07fa" : {
+       "date" : 1453254888821,
+      "regUser" : "ad3b2a78-7831-4537-a2eb-365c99fb07fa",
+      "email" : "sf@gmail.com",
+      "firstname" : "Stephen",
+      "lastname" : "Freir", 
+          
+      "bears" : {
+        "golfbear" : {
+               "bearname":"poolgolf", 
+               "golflbearicon" : "http://gatherngo.tonicdigitalmedia.com/images/svg/golfbear.png"
+        },
+        "poolbear" : {
+                "bearname":"poolbear", 
+                "poolbearicon" : "http://gatherngo.tonicdigitalmedia.com/images/svg/poolbear.png",
+                "lost" : 52,
+                "losttotals" : 44,
+                "played" : "",
+                "points" : 100,
+                 "profile_image" : "http://gatherngo.tonicdigitalmedia.com/images/user/BlackDave.png",
+                 "rank" : 4,
+                 "rated" : 12,                
+                 "results" : "",
+                 "tag" : "Its like a nightmare",
+                 "wins" : 48,
+                 "winstotal" : 44
+        },
+        "squshbear" : {
+          "bearname":"poolsquash", 
+          "squashbearicon" : "http://gatherngo.tonicdigitalmedia.com/images/svg/squashbear.png"
+        }
+      }
+   
+
+    },
+    
+    "f239c8b4-d520-44fb-8d68-9b7dda0fe9da" : {
+      "date" : 1453152659719,
+      "regUser" : "f239c8b4-d520-44fb-8d68-9b7dda0fe9da",
+      "email" : "st@gmail.com",
+      "firstname" : "Thomas",
+      "lastname" : "Moran",
+          
+      "bears" : {
+        "golfbear" : {
+               "bearname":"poolgolf", 
+               "golflbearicon" : "http://gatherngo.tonicdigitalmedia.com/images/svg/golfbear.png"
+        },
+        "poolbear" : {
+                "bearname":"poolbear", 
+                "poolbearicon" : "http://gatherngo.tonicdigitalmedia.com/images/svg/poolbear.png",
+                "lost" : 52,
+                "losttotals" : 44,
+                "played" : "",
+                "points" : 100,
+                 "profile_image" : "http://gatherngo.tonicdigitalmedia.com/images/user/BlackDave.png",
+                 "rank" : 4,
+                 "rated" : 12,                
+                 "results" : "",
+                 "tag" : "Its like a nightmare",
+                 "wins" : 48,
+                 "winstotal" : 44
+        },
+        "squshbear" : {
+          "bearname":"poolsquash", 
+          "squashbearicon" : "http://gatherngo.tonicdigitalmedia.com/images/svg/squashbear.png"
+        }
+      }
+   
+
+    }
+  }
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+ 
+    
+    
+    
+    
+ 

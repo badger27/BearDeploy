@@ -1,0 +1,211 @@
+
+//Player list
+
+
+.odd {
+  background: $brand-odd;
+}
+.even {
+  background: $brand-even;
+}
+
+
+
+.player-ul{
+  margin-bottom: 0px;
+  height: 80px;
+}
+
+
+.player-list{  height: 100%;  }
+
+
+.players-item{
+  text-align: left;
+  height: 100%;
+  display: inline-block;
+  vertical-align: middle;
+
+  li span img {  width:8px;  }
+
+  .player-result{
+    margin-top: 25%;
+  }
+}
+
+
+.poolBear{
+.player-score{
+  //margin: 20px auto 1rem;
+  display: table-cell;
+  text-align: center;
+  color: white;
+  width: 100%;
+  background: $poolbear;
+  height: 80px;
+
+  .number{
+    margin-top: 15%;
+  }
+}
+.player-score:hover{
+  background: $brand-secondary-color;  }
+.player-score:active{
+  background: $brand-secondary-color;  }
+.player-scorefocus{
+  background: $brand-secondary-color;  }
+
+}
+
+
+.player-info{
+  text-align: left;
+
+
+  .player-name{
+
+
+    margin-top: 12%;
+    padding-left: 15px;
+
+    h6{
+      color: black;
+    }
+
+  }
+
+}
+
+
+/*Player Start */
+ .action{
+        
+        img{
+            height:35px;
+            padding: 7px;
+            margin-top: 60%;
+        }
+    }
+
+
+.players{
+    height:100px;
+    background:red;
+}
+
+
+.player-description {
+  width: 6rem;
+  padding-top: 25%;
+  padding-left: 5px;
+  display: table-cell;
+  width: auto;
+  color: white;
+
+    p{font-size:12px;
+     padding: 0 0 0 0;
+    line-height: 1;
+    vertical-align:middle;
+   }
+
+}
+
+
+.playerresult{
+    line-height: .2;
+    padding: .2rem 1rem 1rem 0;
+ }
+
+// .player-list{
+//    margin: 0 auto;
+//    max-width: 100rem;
+//    width: 100%;
+//}
+
+.player-profile{
+
+   margin-bottom:40px;
+   margin-top:30px;
+
+}
+
+
+
+  .playerinfo {
+  margin: 0rem 0;
+  color: white;
+
+    .menu-image {
+      display: block;
+      background-size: contain;
+      position: relative;
+      cursor: pointer;
+      background: none;
+      border-radius: 50%;
+    }
+
+   p{font-size:12px;
+     padding: 0 0 0 0;
+    line-height: 1;
+    vertical-align:middle;
+   }
+
+  img {
+       width: 50px;
+    padding: 1%;
+    padding-left: 5px;
+    display: block;
+    margin: 12px 0px 0px 10px;
+    vertical-align: middle;
+    border-radius: 50%;
+
+
+  }
+
+}
+
+.challenge {
+    padding-top: 10%;
+    padding-right: 10px;
+}
+
+
+
+  
+ 
+
+ ul {
+
+   margin: 0px;
+}
+
+//ul, ol, dl {
+//    font-family: inherit;
+//    font-size: 1rem;
+//    line-height: 1.1;
+//    list-style-position: outside;
+//    margin-bottom: 1.25rem;
+//    list-style-type: none;
+//}
+
+.dropdown {
+    background:none;
+    padding:0;
+    color:$main-font-color;
+}
+
+.dropdown.button::after, button.dropdown::after {
+  border-color: $main-font-color transparent transparent transparent;
+
+}
+  
+  /*Player Start End */
+
+
+  //new list view
+
+
+
+
+
+   
