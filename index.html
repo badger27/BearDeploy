@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html lang="en" ng-app="poolBear" class="no-js">
+    
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>The Bear</title>
+    <meta name="description" content="">
+
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,900,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+     <!--<link href="styles/goo/normalize.css" rel="stylesheet" type="text/css"/>-->
+    <!--<link href="styles/goo/style.css" rel="stylesheet" type="text/css"/>-->
+
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css' rel='stylesheet' type='text/css'>
+
+
+
+
+    <!-- build:css styles/lib.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/foundation-icon-fonts/foundation-icons.css" />
+    <link rel="stylesheet" href="bower_components/angularjs-datepicker/dist/angular-datepicker.css" />
+    <link rel="stylesheet" href="bower_components/angular-moment-picker/dist/angular-moment-picker.min.css" />
+    <link rel="stylesheet" href="bower_components/slick-carousel/slick/slick.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+
+
+
+
+    <!-- build:css styles/app.css -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <link rel="stylesheet" href="styles/app.css">
+    <!-- endbuild -->
+</head>
+<body>
+
+
+
+
+<div ui-view></div>
+
+<!-- build:js js/lib.js -->
+
+<!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/modernizr/modernizr.js"></script>
+<script src="bower_components/fastclick/lib/fastclick.js"></script>
+<script src="bower_components/jquery.cookie/jquery.cookie.js"></script>
+<script src="bower_components/jquery-placeholder/jquery.placeholder.js"></script>
+<script src="bower_components/foundation/js/foundation.js"></script>
+<script src="bower_components/lodash/lodash.js"></script>
+<script src="bower_components/firebase/firebase.js"></script>
+<script src="bower_components/angularfire/dist/angularfire.js"></script>
+<script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+<script src="bower_components/angularjs-datepicker/dist/angular-datepicker.js"></script>
+<script src="bower_components/moment/moment.js"></script>
+<script src="bower_components/angular-moment-picker/dist/angular-moment-picker.min.js"></script>
+<script src="bower_components/angular-mocks/angular-mocks.js"></script>
+<script src="bower_components/slick-carousel/slick/slick.js"></script>
+<script src="bower_components/angular-slick-carousel/dist/angular-slick.js"></script>
+<!-- endbower -->
+
+<!-- endbuild -->
+
+
+
+
+
+<!-- build:js js/app.js -->
+
+<!-- templates:js -->
+<script src="/scripts/templates.js"></script>
+<!-- endinject -->
+
+<script src="https://www.gstatic.com/firebasejs/5.6.0/firebase.js"></script>
+<!--<script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-auth.js"></script>-->
+<!--<script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-store.js"></script>-->
+
+<!--<script src="/__/firebase/6.6.0/firebase-app.js"></script>-->
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#reserved-urls -->
+
+<!-- Initialize Firebase -->
+<!--<script src="/__/firebase/init.js"></script>-->
+
+<!-- inject:js-->
+<script src="components/app.js"></script>
+<script src="components/beargeo/beargeo.js"></script>
+<script src="components/bio/bio.js"></script>
+<script src="components/challenge/challenge.js"></script>
+<script src="components/chat/chat.js"></script>
+<script src="components/groups/group.js"></script>
+<script src="components/login/login.js"></script>
+<script src="components/login/uploadimage.js"></script>
+<script src="components/player/player.js"></script>
+<script src="components/result/result.js"></script>
+<script src="components/search/search.js"></script>
+<script src="components/services/authentication.js"></script>
+<script src="components/services/bearServices.js"></script>
+<script src="components/services/mm-foundation.js"></script>
+<script src="components/services/onboard.js"></script>
+<script src="components/services/poolbearApi.js"></script>
+<script src="components/services/services.js"></script>
+<script src="components/services/styleService.js"></script>
+<script src="components/services/theme-service.js"></script>
+<script src="components/settings/settings.js"></script>
+<script src="components/common/constants/_theme.js"></script>
+<script src="components/common/directives/_actionmodal.js"></script>
+<script src="components/common/directives/_appMessage.js"></script>
+<script src="components/common/directives/_appPopMenue.js"></script>
+<script src="components/common/directives/_scoreMessage.js"></script>
+<script src="components/common/directives/_uploadfile.js"></script>
+<script src="components/common/directives/dir-jcarousel_movies.js"></script>
+<script src="components/common/services/_uploadService.js"></script>
+<script src="components/common/services/confirmScore.js"></script>
+<script src="components/common/services/firebaseDataService.js"></script>
+<script src="components/common/services/setScore.js"></script>
+<script src="components/login/controller/RegisterCTRL.js"></script>
+<script src="components/login/directives/tb-login.js"></script>
+<script src="components/login/directives/tb-logo.js"></script>
+<script src="components/player/controllers/setChallengeCtrl.js"></script>
+<script src="components/player/controllers/setScoreCtrl.js"></script>
+<script src="components/player/directive/d-player.js"></script>
+<script src="components/player/directive/tb-filter-options.js"></script>
+<script src="components/player/directive/tb-modal.js"></script>
+<script src="components/player/directive/tb-player-score.js"></script>
+<script src="components/player/directive/tb-profile-current-small.js"></script>
+<script src="components/player/directive/tb-profile-player-small.js"></script>
+<script src="components/player/directive/tb-profile.js"></script>
+<script src="components/player/directive/tb-rating.js"></script>
+<script src="components/player/directive/tb-statistic.js"></script>
+<script src="components/result/challenge/challenge-list.js"></script>
+<script src="components/result/decline/decline-list.js"></script>
+<script src="components/result/directive/tb-reciever.js"></script>
+<script src="components/result/directive/tb-sender.js"></script>
+<script src="components/result/lost/lost-list.js"></script>
+<script src="components/result/win/win-list.js"></script>
+<script src="components/common/directives/carousel-slick/carousel.js"></script>
+<script src="components/common/services/old/services.js"></script>
+<script src="components/common/directives/carousel-slick/directive/slick.js"></script>
+<!-- endinject -->
+
+<!-- endbuild -->
+
+
+
+
+<!--</body>-->
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+
+
+<!--</html>-->
+
+
