@@ -1,0 +1,554 @@
+@using Orchard.ContentManagement;
+@using Orchard.ContentManagement.Records;
+@using Orchard.Utility.Extensions;
+@using Orchard.MediaPicker.Fields;
+@using Newtonsoft.Json;
+@using Orchard.Widgets.Models;
+
+
+@{
+    
+    Model.Metadata.Wrappers.Remove("Widget_Wrapper");
+    Model.Metadata.Wrappers.Clear();
+ }
+
+@{
+    var contentManager = WorkContext.Resolve<IContentManager>();
+    var contentItems = contentManager.Query("PortfolioItem").List(); 
+    var alternates = Model.Metadata.Alternates; //this returns an array, one of the elements starting with the Widget__Name__... contains a widget name
+    var widgets = contentManager.Query("PortfolioWidget").List(); 
+    
+    var item_placement_area = "";
+    List<string> categories = new List<string>();
+    var PortfolioWidgetName = "";
+    var DisplayCategoriesAsTabs ="";
+    var PortfolioHeading ="";
+    
+    //we need this for the DIV id
+    var ContentID = "";
+    
+    foreach (dynamic alternate in alternates){
+        if(alternate.ToString().StartsWith("Widget__Name__") && alternate.ToString().Contains("url")==false ){
+            PortfolioWidgetName = alternate.ToString().Replace("Widget__Name__","");
+        }       
+    }
+}
+
+
+@*PortfolioWidgetName: @PortfolioWidgetName<br><br>
+
+//Find the correct portfolio widget placement property (this will filter the portfolio items)
+@@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Metadata)) *@
+
+
+   @{
+                            var total_widgets= widgets.Count();
+                            var n = 1;
+                            
+                            foreach (dynamic item in widgets)
+                            {
+                              
+                                 ContentItemRecord contentItemRecord = item.Record;
+                                 
+                                 string json = Newtonsoft.Json.JsonConvert.SerializeObject(contentItemRecord.Infoset, Formatting.Indented, 
+                                                            new JsonSerializerSettings { 
+                                                                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                                                            }).Replace("@Name","Name");
+
+                                 var infoset = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(json);
+                                 var WidgetPart_Name = infoset.Element.Data.WidgetPart.Name;
+                               
+                                 @*<text>
+                                     ContentItemRecord: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(contentItemRecord.Infoset, Formatting.Indented, 
+                                    new JsonSerializerSettings { 
+                                            PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                                    }))
+
+                                WidgetPart_Name: @WidgetPart_Name <br><br>
+                                 contentItemRecord.Infoset.Data: @contentItemRecord.Infoset.Data <br><br>
+                                </text>*@
+                               
+                               
+                               //make sure you're getting the right widget
+                               if (WidgetPart_Name==PortfolioWidgetName){
+                                   
+                                   //get the placement filter parameter 
+                                    item_placement_area = ((ContentItem)item).Parts.SelectMany(p => p.Fields).Where(f => f.Name == "PortfolioWidgetPlacementArea").First().Storage.Get<string>(null);
+                                    DisplayCategoriesAsTabs = ((ContentItem)item).Parts.SelectMany(p => p.Fields).Where(f => f.Name == "DisplayCategoriesAsTabs").First().Storage.Get<string>(null);    
+                                   PortfolioHeading = ((ContentItem)item).Parts.SelectMany(p => p.Fields).Where(f => f.Name == "PortfolioHeading").First().Storage.Get<string>("");    
+                                   //get the content ID  
+                                   var item_id = ((ContentItem)item).Id;
+                                   ContentID =   ((ContentItem)item).Id.ToString();
+                                   
+                                   @*<text>
+                                        ID:  @item_id
+                                        PortfolioWidgetPlacementArea: @item_placement_area
+                                        WidgetPart.Name: @WidgetPart_Name
+                                        DisplayCategoriesAsTabs: @DisplayCategoriesAsTabs
+                                        </text>*@
+                                        
+                                        
+                               }
+
+          }
+    }
+   
+
+<section class="white-bg">
+    <div class="container">
+        <div class="row  white-bg">
+            <div class="col-md-12">
+                @if(!String.IsNullOrEmpty(PortfolioHeading))
+                {
+                    <text>
+                        <br><br>
+                <p><b>@PortfolioHeading</b></p>
+                <br><br>
+                        </text>
+                }
+                
+
+                <div class="mix-filters  @if( DisplayCategoriesAsTabs=="False"){<text>hidden</text>}">
+                    
+                   
+                    
+
+                    @{
+                        //show all tab (only f set to true)
+                        if( DisplayCategoriesAsTabs=="True"){
+                            <text><div class="filter filter-@(ContentID) MixFilterAll" data-filter="all">All</div></text>
+                        }
+                        
+                            
+                           foreach (dynamic item in contentItems)
+                            {
+                                //filter the portfolio categories
+                                var category_name = ((ContentItem)item).Parts.SelectMany(p => p.Fields).Where(f => f.Name == "Category").First().Storage.Get<string>(null);
+                                var item_DisplayInSection  = ((ContentItem)item).Parts.SelectMany(p => p.Fields).Where(f => f.Name == "DisplayInSection").First().Storage.Get<string>(null);
+                                string json_new = Newtonsoft.Json.JsonConvert.SerializeObject(item_DisplayInSection);
+                                //found category
+                                if (item_DisplayInSection!=null && item_DisplayInSection.ToString().Contains( item_placement_area) ){
+                                    //check if category already added
+                                    if(!categories.Contains(category_name) && DisplayCategoriesAsTabs=="True"){
+                                        var MixFilterClass= "MixFilter" + category_name.Trim().Replace(" ","") + ContentID;
+                                        var MixDataFilter = "." + category_name.Trim().ToLower().Replace(" ","-") + "-" + ContentID;
+                                        <text><div class="filter filter-@(ContentID) @MixFilterClass" data-filter="@MixDataFilter">@category_name</div></text>
+                                    }
+                                    
+                                }
+                             }
+                         }     
+                         
+                         
+                    <!--<div class="filter MixFilterPrint" data-filter=".print">Print</div>
+                    <div class="filter MixFilterMotion" data-filter=".motion-graphics">Motion Graphics</div>
+                    <div class="filter MixFilterUser" data-filter=".user-experience">User Experience</div>
+                    <div class="filter MixFilterSafety" data-filter=".safety-video">Safety Video</div>-->
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="white-bg">
+    <div id="port-sq-@(ContentID)" class="port-sq">
+
+        <div>
+            <div class="gallery-main-wrap">
+                <div class="gallery-inner-wrap">
+                    <ul id="MixContainer-@(ContentID)" class="MixContainer margin0 padding0 no-style square-portfolio container white-bg">
+
+                        @{
+                            var total_amount= contentItems.Count();
+                            var i = 1;
+                            
+                            foreach (dynamic item in contentItems)
+                            {
+                                //filter the portfolio items - show only those which are suppos to be displayed in this portfolio widget
+                                //filter by DisplayInSection 
+                                
+                                var item_id = ((ContentItem)item).Id;
+                                var item_title = ((ContentItem)item).Parts.SelectMany(p => p.Fields).Where(f => f.Name == "WorkTitle").First().Storage.Get<string>(null);
+                                var item_client = ((ContentItem)item).Parts.SelectMany(p => p.Fields).Where(f => f.Name == "Client").First().Storage.Get<string>(null);
+                                var item_category = ((ContentItem)item).Parts.SelectMany(p => p.Fields).Where(f => f.Name == "Category").First().Storage.Get<string>(null);
+                                var item_thumb = ((ContentItem)item).Parts.SelectMany(p => p.Fields).Where(f => f.Name == "ThumbnailImage").First().Storage.Get<string>(null);
+                                var item_thumb_hover = ((ContentItem)item).Parts.SelectMany(p => p.Fields).Where(f => f.Name == "ThumbnailImageHover").First().Storage.Get<string>(null);
+                                var item_DisplayInSection  = ((ContentItem)item).Parts.SelectMany(p => p.Fields).Where(f => f.Name == "DisplayInSection").First().Storage.Get<string>(null);
+                                string json_new = Newtonsoft.Json.JsonConvert.SerializeObject(item_DisplayInSection);
+                                
+                       @* id: @item_id <br />
+                        title: @item_title <br />
+                        category: @item_category <br />
+                        client: @item_client<br />
+                        thumb: @item_thumb <br />
+                        thumb2: @item_thumb_hover<br />
+                        DisplayInSection: @json_new<br>*@
+                        
+                        if (item_DisplayInSection!=null && item_DisplayInSection.ToString().Contains( item_placement_area) ){
+                            //MATCH , this item is suppose to be displayed!
+
+                            <text>
+                        <li id="slide@(i)" class="mix @item_category.Trim().ToLower().Replace(" ","-")-@(ContentID)">
+                            <a href="#">
+                                <img src="@item_thumb.Replace("~/","")" alt="" />
+                                <div class="gal-port-imgs">
+                                    <img alt="" src="@item_thumb.Replace("~/", "")" />
+                                    <img alt="" src="@item_thumb_hover.Replace("~/", "")" />
+                                </div>
+                                <div class="image-text">
+                                    <h4>@item_client</h4>
+                                    <div class="border-bottom-gray"></div>
+                                    <div class="gray-letters padding-bottom12 padding-top12">@item_category</div>
+                                </div>
+                            </a>
+                        </li>
+                    </text>
+                        }
+
+
+                        
+
+                                i += 1;
+                            }
+                    }
+
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            <div class="carousel-placing">
+                <div class="carousell-content container">
+                    <div id="carousel-@(ContentID)" class="carousel slide full-width-container" data-interval="false">
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner full-width-container text-left">
+
+                            @{  int j = 1; }
+
+@{
+                          
+  
+  
+                            foreach (dynamic item in contentItems)
+                            {
+                                
+                                var item_id = ((ContentItem)item).Id;
+                                var item_title = ((ContentItem)item).Parts.SelectMany(p => p.Fields).Where(f => f.Name == "WorkTitle").First().Storage.Get<string>(null);
+                                var item_client = ((ContentItem)item).Parts.SelectMany(p => p.Fields).Where(f => f.Name == "Client").First().Storage.Get<string>(null);
+                                var item_category = ((ContentItem)item).Parts.SelectMany(p => p.Fields).Where(f => f.Name == "Category").First().Storage.Get<string>(null);
+                                var item_thumb = ((ContentItem)item).Parts.SelectMany(p => p.Fields).Where(f => f.Name == "ThumbnailImage").First().Storage.Get<string>(null);
+                                var item_thumb_hover = ((ContentItem)item).Parts.SelectMany(p => p.Fields).Where(f => f.Name == "ThumbnailImageHover").First().Storage.Get<string>(null);
+                                var item_description = ((ContentItem)item).Parts.SelectMany(p => p.Fields).Where(f => f.Name == "ShortDescription").First().Storage.Get<string>(null);
+                                var item_date = ((ContentItem)item).Parts.SelectMany(p => p.Fields).Where(f => f.Name == "Date").First().Storage.Get<DateTime>(null);
+
+                                var item_details_html= ((ContentItem)item).Parts.SelectMany(p => p.Fields).Where(f => f.Name == "DetailsHTML").First().Storage.Get<string>(null);
+                                var item_full_images_json = ((ContentItem)item).Parts.SelectMany(p => p.Fields).Where(f => f.Name == "DetailedImages").First().Storage.Get<string>(null);
+
+                                var item_full_images = JsonConvert.DeserializeObject<MediaGalleryItem[]>(item_full_images_json);
+                                   var item_DisplayInSection  = ((ContentItem)item).Parts.SelectMany(p => p.Fields).Where(f => f.Name == "DisplayInSection").First().Storage.Get<string>(null);      
+
+                                 if (item_DisplayInSection!=null && item_DisplayInSection.ToString().Contains( item_placement_area) ){
+                                //MATCH , this item is suppose to be displayed!
+                                
+                            
+                                <text>
+           
+
+                            <div class="item padding-top48" id="for@(j)">
+							
+							
+							
+							
+<!--							
+                                <div class="carousel-image-wrap pull-left  col-xs-4  col-sm-4 col-md-4 col-lg-4 padding-top48">
+                                 
+                                    @if (item_full_images.Count()>1)
+                                    {
+                                        <text>
+                                         <div class="cycler">
+                                             @for (int k = 1; k <= item_full_images.Count(); k++)
+                                                {
+
+                               
+                                                    <img src="@item_full_images[k-1].Url.Replace("~/", "")" alt="" @if (k == 1) { <text> class="active" </text> } />
+                                                }
+                                        </div>
+                                        </text>
+                                    }
+                                    
+                                    @if (item_full_images.Count() == 1)
+                                    {
+                                         <img src="@item_full_images[0].Url.Replace("~/", "")" alt="" />
+                                      
+                                    }
+                                    
+                                    @if (item_details_html!=null)
+                                    {
+                                        @Html.Raw(@item_details_html)
+                                    }
+                                    
+                                @*<div class="cycler">
+                                    <img src="http://www.shindiristudio.com/chronos/images/portfolio/2a.jpg" alt="" class="active" />
+                                    <img src="http://www.shindiristudio.com/chronos/images/portfolio/1a.jpg" alt="" />
+                                    <img src="http://www.shindiristudio.com/chronos/images/portfolio/3a.jpg" alt="" />
+                                </div>*@
+                                </div>-->
+								
+								
+								
+								
+                                <div class="carousel-description   col-xs-4  col-sm-8 col-md-8 col-md-8 pull-left padding-top48 padding-left36">
+                                    <h4>@item_title :</h4>
+                                    <div class="description-inner padding-top12 padding-bottom12 border-bottom-pale">
+                                        <p>@item_description</p>
+                                    </div>
+                                    <div class="padding-bottom12 border-bottom-pale">
+                                        <div class="padding-top12">
+                                            <div class="font-weight600">Client:</div>
+                                            <p>@item_client</p>
+                                        </div>
+                                    </div>
+                                    <div class="padding-bottom12 border-bottom-pale">
+                                        <div class="padding-top12">
+                                            <div class="font-weight600">Date:</div>
+                                            <p>@string.Format("{0:dd. MMMM yyyy}", @item_date).</p>
+                                        </div>
+                                    </div>
+                                    <div class="padding-bottom12 border-bottom-pale">
+                                        <div class="padding-top12">
+                                            <div class="font-weight600">Category:</div>
+                                            <p class="category-label">@item_category</p>
+                                        </div>
+                                    </div>
+                                    @*<ul class="margin0 no-style carousel-socials padding0 padding-top24 social">
+                                        <li><a href="/" class="social-fb"></a></li>
+                                        <li><a href="/" class="social-t"></a></li>
+                                        <li><a href="/" class="social-yt"></a></li>
+                                        <li><a href="/" class="social-v"></a></li>
+                                        <li><a href="/" class="social-g"></a></li>
+                                        <li><a href="/" class="social-in"></a></li>
+                                    </ul>*@
+
+                                    @*<ul class="margin0 no-style carousel-socials padding0 padding-top24">
+                                        <li><a href="#" data-toggle="popover" data-content="Facebook"><img src="http://www.shindiristudio.com/chronos/images/general/facebook.png" alt="" /></a></li>
+                                        <li><a href="#" data-toggle="popover" data-content="Twitter"><img src="http://www.shindiristudio.com/chronos/images/general/twitter.png" alt="" /></a></li>
+                                        <li><a href="#" data-toggle="popover" data-content="Google+"><img src="http://www.shindiristudio.com/chronos/images/general/g+.png" alt="" /></a></li>
+                                        <li><a href="#" data-toggle="popover" data-content="Pinterest"><img src="http://www.shindiristudio.com/chronos/images/general/pinterest.png" alt="" /></a></li>
+                                        <li><a href="#" data-toggle="popover" data-content="DeviantArt"><img src="http://www.shindiristudio.com/chronos/images/general/deviant.png" alt="" /></a></li>
+                                        <li><a href="#" data-toggle="popover" data-content="Linkedin"><img src="http://www.shindiristudio.com/chronos/images/general/linkedin.png" alt="" /></a></li>
+                                    </ul>*@
+                                </div>
+                                
+                                
+                     
+                                
+                                
+                                
+                                
+                                
+                                <div class="clearfix"></div>
+					         <div class="carousel-image-wrap pull-left  col-xs-4  col-sm-4 col-md-4 col-lg-4 padding-top48">
+                                 
+                                    @if (item_full_images.Count()>1)
+                                    {
+                                        <text>
+                                         <div class="cycler">
+                                             @for (int k = 1; k <= item_full_images.Count(); k++)
+                                                {
+
+                               
+                                                    <img src="@item_full_images[k-1].Url.Replace("~/", "")" alt="" @if (k == 1) { <text> class="active" </text> } />
+                                                }
+                                        </div>
+                                        </text>
+                                    }
+                                    
+                                    @if (item_full_images.Count() == 1)
+                                    {
+                                         <img src="@item_full_images[0].Url.Replace("~/", "")" alt="" />
+                                      
+                                    }
+                                    
+                                    @if (item_details_html!=null)
+                                    {
+                                        @Html.Raw(@item_details_html)
+                                    }
+                                    
+                                @*<div class="cycler">
+                                    <img src="http://www.shindiristudio.com/chronos/images/portfolio/2a.jpg" alt="" class="active" />
+                                    <img src="http://www.shindiristudio.com/chronos/images/portfolio/1a.jpg" alt="" />
+                                    <img src="http://www.shindiristudio.com/chronos/images/portfolio/3a.jpg" alt="" />
+                                </div>*@
+                                </div>				
+								
+                            </div>
+							
+			           				
+                       			
+							
+							
+                            </text>
+                             }
+                            j+=1;
+                            
+                            }
+
+ 
+}
+                            
+                        </div>
+						
+						
+						
+						
+						
+
+                        <!-- Controls -->
+                        <div class="carousel-nav">
+                            <a class="left carousel-control" href="#carousel-@(ContentID)" data-slide="prev"></a>
+                            <a class="right carousel-control" href="#carousel-@(ContentID)" data-slide="next"></a>
+                        </div>
+                        <a class="closing carousel-control" href="#"></a>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div><!-- Gallery -->
+    <div class="clearfix"></div>
+</section>
+
+<script>
+    function cycleImages(){
+	  $('.cycler').each(function(){
+		  var $active = $(this).find('.active');
+		  var $next = ($active.next().length > 0) ? $active.next() : $(this).find('img:first');
+		  $next.css('z-index',2);//move the next image up the pile
+		  $active.fadeOut(1500,function(){//fade out the top image
+			  $active.css('z-index',1).show().removeClass('active');//reset the z-index and unhide the image
+			  $next.css('z-index',3).addClass('active');//make the next image the top one
+		  });
+	  });
+    }
+
+    $(document).ready(function () {
+        // run every 7s
+        setInterval('cycleImages()', 5000);
+       
+       
+        
+        var $currentPostion= 0;
+        
+	/* portfolio */
+	
+	function chronos_gallery(){
+		var $textHeight = $('.image-text').height() + 48;
+		$('.image-text').css({'bottom' : - $textHeight});
+}
+
+
+		//					portfolio_images_hover
+
+		$('.content_slider_text_block_wrap').find('.content_img_wrap').hover(function(){
+			$(this).find('.hover_link').show().stop(true).animate({'width' : 21, 'height' : 21, 'margin-top' : -10.5, 'margin-left' : -10.5, opacity : 1}, 150);
+		}, function(){
+			$(this).find('.hover_link').show().stop(true).animate({'width' : 0, 'height' : 0, 'margin-top' : 0, 'margin-left' : 0, opacity : 0}, 150, function(){$(this).hide();});
+		});
+
+		
+			/*    Portfolio Square    */
+            
+	 //add active to the first slide
+    $("#carousel-@(ContentID) .carousel-inner .item").first().addClass("active");
+	
+/*  Carousell Opening  */
+$(document).on('click', '#port-sq-@(ContentID) .square-portfolio a', function(e){
+	e.preventDefault();
+	var $carouselHeight = $('#port-sq-@(ContentID) .carousell-content').outerHeight();
+	var $galleryHeight = $('#port-sq-@(ContentID) .gallery-inner-wrap').outerHeight();
+	var $headlinePortSq = $('#port-sq-@(ContentID) .headline-port-sq').outerHeight();
+	var $galleryPosition = $('#port-sq-@(ContentID)').offset().top;
+    $currentPostion = $galleryPosition;
+    console.log('Current pos:' + $currentPostion);
+	var $headerGutter = $('.navbar-fixed-top').outerHeight();
+	var $itemClicked = parseInt($(this).parent().attr('id').substr(5));
+    console.log('$itemClicked:',$itemClicked);
+	var viewportHeight = $(window).innerHeight() - $('.main-nav-wrap').height();
+	/* Carousel opening */
+	var headerVariable = 0;
+	if($('.responsive_nav').is(':visible')) headerVariable = $('.responsive_nav').closest('nav').outerHeight();
+	else headerVariable = 0;
+	//$('#carousel-@(ContentID)').carousel($itemClicked-1);
+    $('#carousel-@(ContentID) .carousel-inner .item').removeClass("active");
+     $('#carousel-@(ContentID) .carousel-inner #for' +$itemClicked).addClass("active");
+	$(this).parent().parent().parent().parent().stop(true).animate({opacity : 0}, 400,
+		function(){
+			$('html, body').stop(true).animate({'scrollTop' : $galleryPosition + $headlinePortSq - $headerGutter}, 400);
+			if($carouselHeight > viewportHeight){
+				$(this).parent().stop(true).animate({height : $carouselHeight}, 400,
+				function(){
+					$(this).find('.gallery-main-wrap').css({'height' : 0});
+					if($carouselHeight > viewportHeight) $(this).parent().find('.carousel-placing').addClass('dark-gray-bg').css({'height' : $carouselHeight}).animate({opacity : 1}, 400);
+					else $(this).parent().find('.carousel-placing').addClass('dark-gray-bg').css({'height' : viewportHeight}).animate({opacity : 1}, 400);
+				});
+			}
+			else{
+				$(this).parent().stop(true).animate({height : viewportHeight}, 400,
+				function(){
+					$(this).find('.gallery-main-wrap').css({'height' : 0});
+					if($carouselHeight > viewportHeight) $(this).parent().find('.carousel-placing').addClass('dark-gray-bg').css({'height' : $carouselHeight}).animate({opacity : 1}, 400);
+					else $(this).parent().find('.carousel-placing').addClass('dark-gray-bg').css({'height' : viewportHeight}).animate({opacity : 1}, 400);
+				});
+			}
+		});
+});
+
+
+	/* Carousel Closing */
+$(document).on('click', '#port-sq-@(ContentID) .closing.carousel-control', function(){
+	var $carouselHeight = $('#port-sq-@(ContentID) .carousell-content').outerHeight();
+	var $galleryHeight = $('#port-sq-@(ContentID) .gallery-inner-wrap').outerHeight();
+	$(this).parent().parent().parent().stop(true).animate({opacity : 0}, 400,
+		function(){
+			$(this).parent().stop(true).animate({height : $galleryHeight}, 400,
+			function(){
+				$(this).find('.carousel-placing').css({'height' : 0}).removeClass('dark-gray-bg');
+				$(this).find('.gallery-main-wrap').css({'height' : $galleryHeight}).stop(true).animate({opacity : 1}, 400);
+			});
+		});
+        
+         $('html, body').animate({
+            scrollTop: $currentPostion + 'px'
+        }, 'fast');
+        
+});
+/*  hover on squares  */
+$(document).on('mouseenter', '#port-sq-@(ContentID) .square-portfolio a', function(){
+	var imgHeight = $(this).find('img:first').outerHeight();
+	$(this).find('.gal-port-imgs').stop(true).animate({top : -imgHeight}, 250);
+	$(this).find('.image-text').stop(true).animate({bottom : 0}, 250);
+});
+$(document).on('mouseleave', '#port-sq-@(ContentID) .square-portfolio a', function(){
+	var txtHeight = $(this).find('.image-text').outerHeight();
+	$(this).find('.gal-port-imgs').stop(true).animate({top : 0}, 250);
+	$(this).find('.image-text').stop(true).animate({bottom : -txtHeight}, 250);
+});
+
+
+
+    // Instantiate MixItUp:
+$('#MixContainer-@(ContentID)').mixItUp({
+     selectors: {
+       filter: '.filter-@(ContentID)' 
+     }});
+
+
+ $('#carousel-@(ContentID)').carousel('cycle');
+ 
+
+ 
+    })
+</script>
